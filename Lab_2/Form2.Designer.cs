@@ -1,4 +1,4 @@
-﻿namespace Lab_1
+﻿namespace Lab_2
 {
     partial class Kholodilov_1
     {

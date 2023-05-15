@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 //using System.Windows.Media;
 
-namespace Lab_1
+namespace Lab_2
 {
     public partial class Kholodilov_1 : Form
     {
