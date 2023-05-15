@@ -205,10 +205,11 @@ namespace Lab_1
                     case 1:
                         //summ_right += points_y[i].X;
                         //summ_up += points_x[i].X;
-
+                        points_y = Sort_list(points_y, true);
+                        points_x = Sort_list(points_x, true);
                         for (int i = 0; i < points_x.Count; i++)
                         {
-                            if (points_y[i].X == m_last_right )
+                            if (points_y[i].X == m_last_right)
                             {
                                 m_right++;
                             }
@@ -242,7 +243,8 @@ namespace Lab_1
                     case 2:
                         //summ_right += points_y[i].Y;
                         //summ_up += points_x[i].Y;
-
+                        points_y = Sort_list(points_y, false);
+                        points_x = Sort_list(points_x, false);
                         for (int i = 0; i < points_x.Count; i++)
                         {
                             if (points_y[i].Y == m_last_right)
@@ -280,6 +282,7 @@ namespace Lab_1
                     case 3:
                         //summ_right += points_y[i].Y;
                         //summ_up += points_y[i].X;
+                        points_y = Sort_list(points_y, false);
                         for (int i = 0; i < points_x.Count; i++)
                         {
                             if (points_y[i].Y == m_last_right)
@@ -296,7 +299,10 @@ namespace Lab_1
                                 m_right = 0;
                             }
                             m_last_right = points_y[i].Y;
-
+                        }
+                        points_y = Sort_list(points_y, true);
+                        for (int i = 0; i < points_x.Count; i++)
+                        {
                             if (points_y[i].X == m_last_up)
                             {
                                 m_up++;
@@ -316,6 +322,7 @@ namespace Lab_1
                     default:
                         //summ_right += points_x[i].Y;
                         //summ_up += points_x[i].X;
+                        points_x = Sort_list(points_x, false);
                         for (int i = 0; i < points_x.Count; i++)
                         {
                             if (points_x[i].Y == m_last_right)
@@ -332,7 +339,10 @@ namespace Lab_1
                                 m_right = 0;
                             }
                             m_last_right = points_x[i].Y;
-
+                        }
+                        points_x = Sort_list(points_x, true);
+                        for (int i = 0; i < points_x.Count; i++)
+                        { 
                             if (points_x[i].X == m_last_up)
                             {
                                 m_up++;
@@ -388,13 +398,15 @@ namespace Lab_1
                     //summ_up += points_y[i].X;
                     if (points_x.Count % 2 == 0)
                     {
-                        median_right.Text = ((points_y[(int)Math.Ceiling((double)points_x.Count / 2)].Y + points_y[(int)Math.Ceiling((double)points_x.Count / 2) - 1].Y) / 2).ToString();
                         median_up.Text = ((points_y[(int)Math.Ceiling((double)points_x.Count / 2)].X + points_y[(int)Math.Ceiling((double)points_x.Count / 2) - 1].X) / 2).ToString();
+                        points_y = Sort_list(points_y, false);
+                        median_right.Text = ((points_y[(int)Math.Ceiling((double)points_x.Count / 2)].Y + points_y[(int)Math.Ceiling((double)points_x.Count / 2) - 1].Y) / 2).ToString();
                     }
                     else
                     {
-                        median_right.Text = points_y[(int)Math.Ceiling((double)points_x.Count / 2)].Y.ToString();
                         median_up.Text = points_y[(int)Math.Ceiling((double)points_x.Count / 2)].X.ToString();
+                        points_y = Sort_list(points_y, false);
+                        median_right.Text = points_y[(int)Math.Ceiling((double)points_x.Count / 2)].Y.ToString();
                     }
                     break;
                 default:
@@ -402,13 +414,15 @@ namespace Lab_1
                     //summ_up += points_x[i].X;
                     if (points_x.Count % 2 == 0)
                     {
-                        median_right.Text = ((points_x[(int)Math.Ceiling((double)points_x.Count / 2)].Y + points_x[(int)Math.Ceiling((double)points_x.Count / 2) - 1].Y) / 2).ToString();
                         median_up.Text = ((points_x[(int)Math.Ceiling((double)points_x.Count / 2)].X + points_x[(int)Math.Ceiling((double)points_x.Count / 2) - 1].X) / 2).ToString();
+                        points_x = Sort_list(points_x, false);
+                        median_right.Text = ((points_x[(int)Math.Ceiling((double)points_x.Count / 2)].Y + points_x[(int)Math.Ceiling((double)points_x.Count / 2) - 1].Y) / 2).ToString();
                     }
                     else
                     {
-                        median_right.Text = points_x[(int)Math.Ceiling((double)points_x.Count / 2)].Y.ToString();
                         median_up.Text = points_x[(int)Math.Ceiling((double)points_x.Count / 2)].X.ToString();
+                        points_x = Sort_list(points_x, false);
+                        median_right.Text = points_x[(int)Math.Ceiling((double)points_x.Count / 2)].Y.ToString();
                     }
                     break;
             }
@@ -436,37 +450,47 @@ namespace Lab_1
                 is_density_change = false;
             }
         }
-        public void Sort_x()
+        public List<PointF> Sort_list(List<PointF> list, bool is_fist = true)
         {
-            float[] massive_data_x1 = new float[points_x.Count];
-            float[] massive_data_x2 = new float[points_x.Count];
-            for (int i = 0; i < points_x.Count; i++)
+            float[,] massive_data = new float[2, list.Count];
+            for (int i = 0; i < list.Count; i++)
             {
-                massive_data_x1[i] = points_x[i].X;
-                massive_data_x2[i] = points_x[i].Y;
+                massive_data[0, i] = list[i].X;
+                massive_data[1, i] = list[i].Y;
             }
-            int n = points_x.Count;
+            int n = list.Count;
             for (int i = 0; i < n - 1; i++)
                 for (int j = 0; j < n - i - 1; j++)
-                    if (massive_data_x1[j] > massive_data_x1[j + 1])
+                    if (is_fist)
                     {
-                        var tempVar = massive_data_x1[j];
-                        massive_data_x1[j] = massive_data_x1[j + 1];
-                        massive_data_x1[j + 1] = tempVar;
+                        if (massive_data[0, j] > massive_data[0, j + 1])
+                        {
+                            var tempVar = massive_data[0, j];
+                            massive_data[0, j] = massive_data[0, j + 1];
+                            massive_data[0, j + 1] = tempVar;
+                            tempVar = massive_data[1, j];
+                            massive_data[1, j] = massive_data[1, j + 1];
+                            massive_data[1, j + 1] = tempVar;
+                        }
                     }
-            for (int i = 0; i < n - 1; i++)
-                for (int j = 0; j < n - i - 1; j++)
-                    if (massive_data_x2[j] > massive_data_x2[j + 1])
+                    else
                     {
-                        var tempVar = massive_data_x2[j];
-                        massive_data_x2[j] = massive_data_x2[j + 1];
-                        massive_data_x2[j + 1] = tempVar;
+                        if (massive_data[1, j] > massive_data[1, j + 1])
+                        {
+                            var tempVar = massive_data[1, j];
+                            massive_data[1, j] = massive_data[1, j + 1];
+                            massive_data[1, j + 1] = tempVar;
+                            tempVar = massive_data[0, j];
+                            massive_data[0, j] = massive_data[0, j + 1];
+                            massive_data[0, j + 1] = tempVar;
+                        }
                     }
-            points_x.Clear();
+            list.Clear();
             for (int i = 0; i < Int32.Parse(num_point.Text); i++)
             {
-                points_x.Add(new PointF(massive_data_x1[i], massive_data_x2[i]));
+                list.Add(new PointF(massive_data[0, i], massive_data[1, i]));
             }
+            return list;
         }
         private void Start_but_Click(object sender, EventArgs e)
         {
