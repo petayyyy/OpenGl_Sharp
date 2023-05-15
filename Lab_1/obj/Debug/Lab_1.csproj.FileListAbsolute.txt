@@ -1,0 +1,28 @@
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.csproj.AssemblyReference.cache
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.csproj.SuggestedBindingRedirects.cache
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.Properties.Resources.resources
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.csproj.GenerateResource.cache
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.csproj.CoreCompileInputs.cache
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\bin\Debug\Lab_1.exe.config
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\bin\Debug\Lab_1.exe
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\bin\Debug\Lab_1.pdb
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.csproj.CopyComplete
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.exe
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.pdb
+C:\Users\ilyah\Desktop\Долги\Разработка систем сбора и обработки данных\Lab_1\obj\Debug\Lab_1.Form1.resources
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\bin\Debug\Lab_1.exe.config
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\bin\Debug\Lab_1.exe
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\bin\Debug\Lab_1.pdb
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.csproj.AssemblyReference.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.csproj.SuggestedBindingRedirects.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.Properties.Resources.resources
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.csproj.GenerateResource.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.csproj.CoreCompileInputs.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.csproj.CopyComplete
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.exe
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.pdb
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\bin\Debug\SharpGL.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\bin\Debug\SharpGL.xml
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Lab_1\obj\Debug\Lab_1.Kholodilov_1.resources
