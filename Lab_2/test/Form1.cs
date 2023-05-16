@@ -6,12 +6,14 @@ namespace test
         bool is_start_work = false;
         bool is_noise_change = false;
         bool is_generate_task = false;
+        bool is_rotate_change = false;
         float[,] generated_point;
         int count_point;
         int axis_line_size = 4;
         int point_size = 5;
         int picture_size = 1100;
         private _3d_transform_point tr_3D = new _3d_transform_point();
+        int[] start_mouse_pose;
 
         public Kholodilov_2()
         {
@@ -25,8 +27,8 @@ namespace test
             dataGridView1.Columns[2].Width = size_grid;
             dataGridView1.Width = size_grid * dataGridView1.ColumnCount + 20;
             Main_box.Image = new Bitmap(picture_size, picture_size);
+            tr_3D.half_picture_size = (picture_size - 100) / 2;
         }
-
         public void draw_main_img()
         {
             // Draw axis
@@ -34,33 +36,12 @@ namespace test
             Graphics g = Graphics.FromImage(bmp);
             g.TranslateTransform(picture_size / 2, picture_size / 2);
 
-            float[,,,] Axis =  { { {{0f}, {0f}, {0f}}, {{0.75f}, {0.5f}, {0f}}  }, // X: start, end
-                                 { {{0f}, {0f}, {0f}}, {{-0.75f}, {0.5f}, {0f}} }, // Y: start, end
-                                 { {{0f}, {0f}, {0f}}, {{0f}, {-1f}, {0f}}      }  // Z: start, end
-            };
-
-            float[,] XAxe0Vector = { { 0f }, { 0f }, { 0f } };
-            float[,] XAxeEndVector = { { 0.75f }, { 0.5f }, { 0f } };
-
-            float[,] YAxe0Vector = { { 0f }, { 0f }, { 0 } };
-            float[,] YAxeEndVector = { { -0.75f }, { 0.5f }, { 0 } };
-
-            float[,] ZAxe0Vector = { { 0 }, { 0 }, { 0 } };
-            float[,] ZAxeEndVector = { { 0 }, { -1f }, { 0 } };
-
-            //int[] XAxe0Point = tr_3D.Project(XAxe0Vector);
-            //int[] XAxeEndPoint = tr_3D.Project(XAxeEndVector);
-            //int[] YAxe0Point = tr_3D.Project(YAxe0Vector);
-            //int[] YAxeEndPoint = tr_3D.Project(YAxeEndVector);
-            //int[] ZAxe0Point = tr_3D.Project(ZAxe0Vector);
-            //int[] ZAxeEndPoint = tr_3D.Project(ZAxeEndVector);
-
             int[] XAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // X: start
             int[] XAxeEndPoint = tr_3D.Project(new float[,] { { 0.75f }, { 0.5f }, { 0f } }); // X: end
             int[] YAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // Y: start
             int[] YAxeEndPoint = tr_3D.Project(new float[,] { { -0.75f}, { 0.5f},  { 0f} });  // Y: end
             int[] ZAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // Z: start
-            int[] ZAxeEndPoint = tr_3D.Project(new float[,] { { -0.75f}, { 0.5f},  { 0f} });  // Z: end
+            int[] ZAxeEndPoint = tr_3D.Project(new float[,] { { 0f },    { -1f }, { 0f } });  // Z: end
 
             g.DrawLine(new Pen(Color.Red, axis_line_size), XAxe0Point[0], XAxe0Point[1], XAxeEndPoint[0], XAxeEndPoint[1]);
             g.DrawLine(new Pen(Color.Green, axis_line_size), YAxe0Point[0], YAxe0Point[1], YAxeEndPoint[0], YAxeEndPoint[1]);
@@ -130,12 +111,10 @@ namespace test
             view_datagreed();
             draw_main_img();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             draw_main_img();
         }
-
         private void Start_but_Click_1(object sender, EventArgs e)
         {
             if (Int32.Parse(num_point.Text) > 0)
@@ -145,7 +124,6 @@ namespace test
                 timer1.Start();
             }
         }
-
         private void generate_var_but_Click(object sender, EventArgs e)
         {
             if (Int32.Parse(num_point.Text) > 0)
@@ -155,12 +133,10 @@ namespace test
                 timer1.Start();
             }
         }
-
         private void noise_ValueChanged(object sender, EventArgs e)
         {
             is_noise_change = true;
         }
-
         private void Refr_but_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
@@ -177,11 +153,32 @@ namespace test
                 draw_main_img();
                 is_noise_change = false;
             }
+            else if (is_start_work && is_rotate_change)
+            {
+                draw_main_img();
+            }
         }
-
         private void picture_but_Click(object sender, EventArgs e)
         {
-            Main_box.Image.Save(@"A:\Git\OpenGl_Sharp\Lab_2\images\file.png");
+            Main_box.Image.Save(@"A:\Git\OpenGl_Sharp\Lab_2\images\" + name_pic.Text + ".png");
+        }
+        private void Main_box_MouseDown(object sender, MouseEventArgs e)
+        {
+            is_rotate_change = true;
+            start_mouse_pose = new int[]  {e.X, e.Y};
+        }
+        private void Main_box_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (is_rotate_change)
+            {
+                tr_3D.AngleY -= (float)((((double)(start_mouse_pose[0] - e.X)) * (Math.PI / 6)) / tr_3D.half_picture_size);
+                tr_3D.AngleX -= (float)((((double)(start_mouse_pose[1] - e.Y)) * (Math.PI / 6)) / tr_3D.half_picture_size);
+                start_mouse_pose = new int[] { e.X, e.Y };
+            }
+        }
+        private void Main_box_MouseUp(object sender, MouseEventArgs e)
+        {
+            is_rotate_change = false;
         }
     }
 }

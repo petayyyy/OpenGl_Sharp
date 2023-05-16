@@ -46,6 +46,8 @@
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label3 = new System.Windows.Forms.Label();
+            this.name_pic = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Main_box)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.noise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -61,6 +63,9 @@
             this.Main_box.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Main_box.TabIndex = 0;
             this.Main_box.TabStop = false;
+            this.Main_box.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Main_box_MouseDown);
+            this.Main_box.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_box_MouseMove);
+            this.Main_box.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Main_box_MouseUp);
             // 
             // Start_but
             // 
@@ -185,6 +190,24 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(1692, 262);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 20);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Name picture";
+            // 
+            // name_pic
+            // 
+            this.name_pic.Location = new System.Drawing.Point(1692, 285);
+            this.name_pic.Name = "name_pic";
+            this.name_pic.Size = new System.Drawing.Size(125, 27);
+            this.name_pic.TabIndex = 10;
+            this.name_pic.Text = "file_1";
+            // 
             // Kholodilov_2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -192,6 +215,8 @@
             this.AutoScroll = true;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1947, 1306);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.name_pic);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -230,5 +255,7 @@
         private DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.Timer timer1;
         private OpenFileDialog openFileDialog1;
+        private Label label3;
+        private TextBox name_pic;
     }
 }

@@ -11,16 +11,16 @@ namespace test
         public float AngleX { get; set; }
         public float AngleY { get; set; }
         public float AngleZ { get; set; }
-
-        public int[] Project(float[,] vector)
+        public int half_picture_size { get; set; }
+        public int[] Project(float[,] vector, int image_size = 1000)
         {
             float[,] Rotated = MultiplyVectors(GetRotationMatX(), vector);
             Rotated = MultiplyVectors(GetRotationMatY(), Rotated);
             Rotated = MultiplyVectors(GetRotationMatZ(), Rotated);
             Rotated = ProjectionGetCenter(Rotated);
 
-            int X = (int)(Rotated[0, 0] * 520);
-            int Y = (int)(Rotated[1, 0] * 500);
+            int X = (int)(Rotated[0, 0] * (image_size / 2));
+            int Y = (int)(Rotated[1, 0] * (image_size / 2));
             return new int[] { X, Y };
         }
 
