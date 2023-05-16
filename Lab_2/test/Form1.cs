@@ -42,12 +42,12 @@ namespace test
             Graphics g = Graphics.FromImage(bmp);
             g.TranslateTransform(picture_size / 2, picture_size / 2);
 
-            int[] XAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // X: start
-            int[] XAxeEndPoint = tr_3D.Project(new float[,] { { 1f },    { 0f },   { 0f } }); // X: end
-            int[] YAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // Y: start
-            int[] YAxeEndPoint = tr_3D.Project(new float[,] { { 0f},     { 0f},    { -1f} });  // Y: end
-            int[] ZAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // Z: start
-            int[] ZAxeEndPoint = tr_3D.Project(new float[,] { { 0f },    { -1f }, { 0f } });  // Z: end
+            int[] XAxe0Point = tr_3D.Transform_point(new float[,]   { { 0f },    { 0f },   { 0f } }); // X: start
+            int[] XAxeEndPoint = tr_3D.Transform_point(new float[,] { { 1f },    { 0f },   { 0f } }); // X: end
+            int[] YAxe0Point = tr_3D.Transform_point(new float[,]   { { 0f },    { 0f },   { 0f } }); // Y: start
+            int[] YAxeEndPoint = tr_3D.Transform_point(new float[,] { { 0f},     { 0f},    { -1f} });  // Y: end
+            int[] ZAxe0Point = tr_3D.Transform_point(new float[,]   { { 0f },    { 0f },   { 0f } }); // Z: start
+            int[] ZAxeEndPoint = tr_3D.Transform_point(new float[,] { { 0f },    { -1f }, { 0f } });  // Z: end
 
             g.DrawLine(new Pen(Color.Red, axis_line_size), XAxe0Point[0], XAxe0Point[1], XAxeEndPoint[0], XAxeEndPoint[1]);
             g.DrawLine(new Pen(Color.Green, axis_line_size), YAxe0Point[0], YAxe0Point[1], YAxeEndPoint[0], YAxeEndPoint[1]);
@@ -62,7 +62,7 @@ namespace test
             {
                 for (int i = 0; i < count_point; i++)
                 {
-                    int[] Projected = tr_3D.Project(new float[,] { { generated_point[i, 0] }, { -generated_point[i, 2] }, { -generated_point[i, 1] } });
+                    int[] Projected = tr_3D.Transform_point(new float[,] { { generated_point[i, 0] }, { -generated_point[i, 2] }, { -generated_point[i, 1] } });
                     // Calculate color for points
                     Color col = Color.FromArgb(tr_3D.Calculate_color(new float[,] { { generated_point[i, 0] }, { -generated_point[i, 2] }, { -generated_point[i, 1] } }), 0, 0, 0);
                     g.FillEllipse(new SolidBrush(col), Projected[0] - point_size, Projected[1] - point_size, point_size * 2, point_size * 2);
@@ -89,6 +89,7 @@ namespace test
         public void generate_points(bool is_task = false, bool is_noise = false)
         {
             generated_point = new float[count_point, 3];
+            float [] sum_generated_point = new float[3];
             for (int i = 0; i < count_point; i++)
             {
                 if (!is_task) for (int j = 0; j < 3; j++) generated_point[i, j] = (float)Math.Round((double)random.Next(-100, 100) / 100, 2) + noise_for_points(is_noise);
@@ -100,8 +101,20 @@ namespace test
                     generated_point[i, 1] = (float)(0.5f * Math.Sin(4d * Math.PI * ((double)i / count_point))) + noise_for_points(is_noise);
                     //z = -1 + 2 * i / N
                     generated_point[i, 2] = (float)(-1f + 2f * (float)i / count_point) + noise_for_points(is_noise);
+
+                    ////x = 0.7 * cos(6 * pi * (i / count_point))
+                    //generated_point[i, 0] = (float)(0.7f * Math.Cos(6d * Math.PI * (((double)i / count_point))));
+                    ////y = 0.5 * sin(4 * pi * (i / count_point))
+                    //generated_point[i, 1] = (float)(0.5f * Math.Sin(4d * Math.PI * ((double)i / count_point)));
+                    ////z = -1 + 2 * i / N
+                    //generated_point[i, 2] = (float)(-1f + 2f * (float)i / count_point);
+                    //for (int j = 0; j < 3; j++) sum_generated_point[j] += generated_point[i, j];
                 }
             }
+            //if (is_noise)
+            //{
+            //    for (int i = 0; i < count_point; i++) for (int j = 0; j < 3; j++) generated_point[i, j] = normal_distribution(generated_point[i, j], sum_generated_point[j]);
+            //}
         }
         private float noise_for_points(bool is_noise = false)
         {
@@ -112,6 +125,17 @@ namespace test
             float gen_noise = (float)((float)(noise.Value / 100) * std_normal);
             return gen_noise;
         }
+
+        public float normal_distribution(float x, float mu)
+        {
+            float sigma;
+            mu = (float)(noise.Value / 100);
+            sigma = 1;
+            float a = 1.0f / (sigma * (float)Math.Sqrt(2.0d * Math.PI));
+            float b = -0.5f * (float)Math.Pow((x - mu) / sigma, 2d);
+            return x - (float)(a * Math.Exp(b));
+        }
+
         public void start_work(bool is_task = false)
         {
             count_point = Int32.Parse(num_point.Text);
