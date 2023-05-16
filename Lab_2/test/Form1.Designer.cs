@@ -120,6 +120,7 @@
             this.picture_but.TabIndex = 6;
             this.picture_but.Text = "Take picture";
             this.picture_but.UseVisualStyleBackColor = false;
+            this.picture_but.Click += new System.EventHandler(this.picture_but_Click);
             // 
             // label1
             // 

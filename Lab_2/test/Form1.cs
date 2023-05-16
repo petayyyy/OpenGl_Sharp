@@ -48,12 +48,20 @@ namespace test
             float[,] ZAxe0Vector = { { 0 }, { 0 }, { 0 } };
             float[,] ZAxeEndVector = { { 0 }, { -1f }, { 0 } };
 
-            int[] XAxe0Point = tr_3D.Project(XAxe0Vector);
-            int[] XAxeEndPoint = tr_3D.Project(XAxeEndVector);
-            int[] YAxe0Point = tr_3D.Project(YAxe0Vector);
-            int[] YAxeEndPoint = tr_3D.Project(YAxeEndVector);
-            int[] ZAxe0Point = tr_3D.Project(ZAxe0Vector);
-            int[] ZAxeEndPoint = tr_3D.Project(ZAxeEndVector);
+            //int[] XAxe0Point = tr_3D.Project(XAxe0Vector);
+            //int[] XAxeEndPoint = tr_3D.Project(XAxeEndVector);
+            //int[] YAxe0Point = tr_3D.Project(YAxe0Vector);
+            //int[] YAxeEndPoint = tr_3D.Project(YAxeEndVector);
+            //int[] ZAxe0Point = tr_3D.Project(ZAxe0Vector);
+            //int[] ZAxeEndPoint = tr_3D.Project(ZAxeEndVector);
+
+            int[] XAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // X: start
+            int[] XAxeEndPoint = tr_3D.Project(new float[,] { { 0.75f }, { 0.5f }, { 0f } }); // X: end
+            int[] YAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // Y: start
+            int[] YAxeEndPoint = tr_3D.Project(new float[,] { { -0.75f}, { 0.5f},  { 0f} });  // Y: end
+            int[] ZAxe0Point = tr_3D.Project(new float[,]   { { 0f },    { 0f },   { 0f } }); // Z: start
+            int[] ZAxeEndPoint = tr_3D.Project(new float[,] { { -0.75f}, { 0.5f},  { 0f} });  // Z: end
+
             g.DrawLine(new Pen(Color.Red, axis_line_size), XAxe0Point[0], XAxe0Point[1], XAxeEndPoint[0], XAxeEndPoint[1]);
             g.DrawLine(new Pen(Color.Green, axis_line_size), YAxe0Point[0], YAxe0Point[1], YAxeEndPoint[0], YAxeEndPoint[1]);
             g.DrawLine(new Pen(Color.Blue, axis_line_size), ZAxe0Point[0], ZAxe0Point[1], ZAxeEndPoint[0], ZAxeEndPoint[1]);
@@ -169,6 +177,11 @@ namespace test
                 draw_main_img();
                 is_noise_change = false;
             }
+        }
+
+        private void picture_but_Click(object sender, EventArgs e)
+        {
+            Main_box.Image.Save(@"A:\Git\OpenGl_Sharp\Lab_2\images\file.png");
         }
     }
 }
