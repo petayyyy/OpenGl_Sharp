@@ -11,4 +11,4 @@ A:\Git\OpenGl_Sharp\Lab_2\obj\Debug\Lab_2.csproj.CoreCompileInputs.cache
 A:\Git\OpenGl_Sharp\Lab_2\obj\Debug\Lab_2.csproj.CopyComplete
 A:\Git\OpenGl_Sharp\Lab_2\obj\Debug\Lab_1.exe
 A:\Git\OpenGl_Sharp\Lab_2\obj\Debug\Lab_1.pdb
-A:\Git\OpenGl_Sharp\Lab_2\obj\Debug\Lab_2.Kholodilov_1.resources
+A:\Git\OpenGl_Sharp\Lab_2\obj\Debug\Lab_2.Kholodilov_2.resources
