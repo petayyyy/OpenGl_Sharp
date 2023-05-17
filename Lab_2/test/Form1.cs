@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 namespace test
 {
     public partial class Kholodilov_2 : Form
@@ -95,47 +97,57 @@ namespace test
                 if (!is_task) for (int j = 0; j < 3; j++) generated_point[i, j] = (float)Math.Round((double)random.Next(-100, 100) / 100, 2) + noise_for_points(is_noise);
                 else
                 {
-                    //x = 0.7 * cos(6 * pi * (i / count_point))
-                    generated_point[i, 0] = (float)(0.7f * Math.Cos(6d * Math.PI * (((double)i / count_point)))) + noise_for_points(is_noise);
-                    //y = 0.5 * sin(4 * pi * (i / count_point))
-                    generated_point[i, 1] = (float)(0.5f * Math.Sin(4d * Math.PI * ((double)i / count_point))) + noise_for_points(is_noise);
-                    //z = -1 + 2 * i / N
-                    generated_point[i, 2] = (float)(-1f + 2f * (float)i / count_point) + noise_for_points(is_noise);
-
                     ////x = 0.7 * cos(6 * pi * (i / count_point))
-                    //generated_point[i, 0] = (float)(0.7f * Math.Cos(6d * Math.PI * (((double)i / count_point))));
+                    //generated_point[i, 0] = (float)(0.7f * Math.Cos(6d * Math.PI * (((double)i / count_point)))) + noise_for_points(is_noise);
                     ////y = 0.5 * sin(4 * pi * (i / count_point))
-                    //generated_point[i, 1] = (float)(0.5f * Math.Sin(4d * Math.PI * ((double)i / count_point)));
+                    //generated_point[i, 1] = (float)(0.5f * Math.Sin(4d * Math.PI * ((double)i / count_point))) + noise_for_points(is_noise);
                     ////z = -1 + 2 * i / N
-                    //generated_point[i, 2] = (float)(-1f + 2f * (float)i / count_point);
-                    //for (int j = 0; j < 3; j++) sum_generated_point[j] += generated_point[i, j];
+                    //generated_point[i, 2] = (float)(-1f + 2f * (float)i / count_point) + noise_for_points(is_noise);
+
+                    //x = 0.7 * cos(6 * pi * (i / count_point))
+                    generated_point[i, 0] = check_point((float)(0.7f * Math.Cos(6d * Math.PI * (((double)i / count_point)))));
+                    //y = 0.5 * sin(4 * pi * (i / count_point))
+                    generated_point[i, 1] = check_point((float)(0.5f * Math.Sin(4d * Math.PI * ((double)i / count_point))));
+                    //z = -1 + 2 * i / N
+                    generated_point[i, 2] = check_point((float)(-1f + 2f * (float)i / count_point));
+                    for (int j = 0; j < 3; j++) sum_generated_point[j] += generated_point[i, j];
                 }
             }
-            //if (is_noise)
-            //{
-            //    for (int i = 0; i < count_point; i++) for (int j = 0; j < 3; j++) generated_point[i, j] = normal_distribution(generated_point[i, j], sum_generated_point[j]);
-            //}
+            if (is_noise)
+            {
+                for (int i = 0; i < count_point; i++) for (int j = 0; j < 3; j++) generated_point[i, j] = normal_distribution(generated_point[i, j], (float)(sum_generated_point[j]/count_point));
+            }
+        }
+        public float check_point(float x)
+        {
+            if (x < -1f) return -1f;
+            else if (x > 1f) return 1f;
+            else return (float)Math.Round(x, 2);
         }
         private float noise_for_points(bool is_noise = false)
         {
             if (!is_noise) return 0.0f;
-            double u = 1.0f - (float)random.NextDouble();
-            double v = 1.0f - (float)random.NextDouble();
+            double u = 1.0d - random.NextDouble();
+            double v = 1.0d - random.NextDouble();
             float std_normal = (float)(Math.Sqrt(-2.0d * Math.Log(u)) * Math.Sin(2.0d * Math.PI * v));
             float gen_noise = (float)((float)(noise.Value / 100) * std_normal);
             return gen_noise;
         }
-
         public float normal_distribution(float x, float mu)
         {
-            float sigma;
-            mu = (float)(noise.Value / 100);
-            sigma = 1;
-            float a = 1.0f / (sigma * (float)Math.Sqrt(2.0d * Math.PI));
-            float b = -0.5f * (float)Math.Pow((x - mu) / sigma, 2d);
-            return x - (float)(a * Math.Exp(b));
+            double u = random.NextDouble();
+            double v = random.NextDouble();
+            float std_normal = (float)(Math.Sqrt(-2.0d * Math.Log(u)) * Math.Sin(2.0d * Math.PI * v));
+            float gen_noise = (float)((float)(noise.Value / 1000) * std_normal) + x + mu;
+            return gen_noise;
         }
-
+        //public float normal_distribution(float x, float mu)
+        //{
+        //    float sigma = (float)(noise.Value / 10);
+        //    float a = 1.0f / (sigma * (float)Math.Sqrt(2.0d * Math.PI));
+        //    float b = -0.5f * (float)Math.Pow((x - mu) / sigma, 2d);
+        //    return x - (float)(a * Math.Exp(b));
+        //}
         public void start_work(bool is_task = false)
         {
             count_point = Int32.Parse(num_point.Text);
@@ -193,6 +205,7 @@ namespace test
             Start_but.Enabled = true;
             Open_but.Enabled = true;
             Save_but.Enabled = false;
+            noise.Value = 0;
             draw_main_img();
         }
         private void timer1_Tick_1(object sender, EventArgs e)
