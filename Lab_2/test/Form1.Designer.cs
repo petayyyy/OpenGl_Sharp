@@ -75,7 +75,7 @@
             // Start_but
             // 
             this.Start_but.BackColor = System.Drawing.Color.White;
-            this.Start_but.Location = new System.Drawing.Point(1169, 12);
+            this.Start_but.Location = new System.Drawing.Point(1171, 72);
             this.Start_but.Name = "Start_but";
             this.Start_but.Size = new System.Drawing.Size(139, 111);
             this.Start_but.TabIndex = 1;
@@ -85,7 +85,7 @@
             // 
             // noise
             // 
-            this.noise.Location = new System.Drawing.Point(1170, 795);
+            this.noise.Location = new System.Drawing.Point(1171, 451);
             this.noise.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -98,7 +98,7 @@
             // 
             // num_point
             // 
-            this.num_point.Location = new System.Drawing.Point(1170, 738);
+            this.num_point.Location = new System.Drawing.Point(1171, 394);
             this.num_point.Name = "num_point";
             this.num_point.Size = new System.Drawing.Size(138, 27);
             this.num_point.TabIndex = 3;
@@ -107,7 +107,7 @@
             // generate_var_but
             // 
             this.generate_var_but.BackColor = System.Drawing.Color.White;
-            this.generate_var_but.Location = new System.Drawing.Point(1170, 129);
+            this.generate_var_but.Location = new System.Drawing.Point(1172, 189);
             this.generate_var_but.Name = "generate_var_but";
             this.generate_var_but.Size = new System.Drawing.Size(139, 111);
             this.generate_var_but.TabIndex = 4;
@@ -118,7 +118,7 @@
             // Refr_but
             // 
             this.Refr_but.BackColor = System.Drawing.Color.White;
-            this.Refr_but.Location = new System.Drawing.Point(1170, 246);
+            this.Refr_but.Location = new System.Drawing.Point(1171, 585);
             this.Refr_but.Name = "Refr_but";
             this.Refr_but.Size = new System.Drawing.Size(139, 111);
             this.Refr_but.TabIndex = 5;
@@ -129,7 +129,7 @@
             // picture_but
             // 
             this.picture_but.BackColor = System.Drawing.Color.White;
-            this.picture_but.Location = new System.Drawing.Point(1169, 597);
+            this.picture_but.Location = new System.Drawing.Point(1170, 936);
             this.picture_but.Name = "picture_but";
             this.picture_but.Size = new System.Drawing.Size(139, 111);
             this.picture_but.TabIndex = 6;
@@ -141,7 +141,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(1170, 772);
+            this.label1.Location = new System.Drawing.Point(1171, 428);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 20);
             this.label1.TabIndex = 7;
@@ -151,7 +151,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(1170, 715);
+            this.label2.Location = new System.Drawing.Point(1171, 371);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 20);
             this.label2.TabIndex = 8;
@@ -165,7 +165,7 @@
             this.Y,
             this.Z,
             this.n});
-            this.dataGridView1.Location = new System.Drawing.Point(1315, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(1330, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
@@ -213,7 +213,7 @@
             // 
             this.checkBox_n.AutoSize = true;
             this.checkBox_n.BackColor = System.Drawing.Color.White;
-            this.checkBox_n.Location = new System.Drawing.Point(1198, 842);
+            this.checkBox_n.Location = new System.Drawing.Point(1199, 498);
             this.checkBox_n.Name = "checkBox_n";
             this.checkBox_n.Size = new System.Drawing.Size(83, 24);
             this.checkBox_n.TabIndex = 12;
@@ -244,7 +244,7 @@
             // Open_but
             // 
             this.Open_but.BackColor = System.Drawing.Color.White;
-            this.Open_but.Location = new System.Drawing.Point(1169, 363);
+            this.Open_but.Location = new System.Drawing.Point(1170, 702);
             this.Open_but.Name = "Open_but";
             this.Open_but.Size = new System.Drawing.Size(139, 111);
             this.Open_but.TabIndex = 15;
@@ -255,7 +255,7 @@
             // Save_but
             // 
             this.Save_but.BackColor = System.Drawing.Color.White;
-            this.Save_but.Location = new System.Drawing.Point(1169, 480);
+            this.Save_but.Location = new System.Drawing.Point(1170, 819);
             this.Save_but.Name = "Save_but";
             this.Save_but.Size = new System.Drawing.Size(139, 111);
             this.Save_but.TabIndex = 16;
@@ -269,7 +269,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1579, 1160);
+            this.ClientSize = new System.Drawing.Size(1604, 1160);
             this.Controls.Add(this.Save_but);
             this.Controls.Add(this.Open_but);
             this.Controls.Add(this.angleY_bar);
