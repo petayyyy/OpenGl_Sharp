@@ -27,3 +27,32 @@ A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progec
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.csproj.CopyComplete
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.exe
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.pdb
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\dll\x86\OpenCvSharpExtern.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\dll\x86\opencv_videoio_ffmpeg455.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\dll\x64\OpenCvSharpExtern.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\dll\x64\opencv_videoio_ffmpeg455_64.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\Ing_progect_6_sem.exe.config
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\Ing_progect_6_sem.exe
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\Ing_progect_6_sem.pdb
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\OpenCvSharp.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\OpenCvSharp.Extensions.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Buffers.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Drawing.Common.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Memory.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Numerics.Vectors.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\OpenCvSharp.xml
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\OpenCvSharp.Extensions.xml
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Buffers.xml
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Memory.xml
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Numerics.Vectors.xml
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.csproj.AssemblyReference.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.csproj.SuggestedBindingRedirects.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.Form1.resources
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.Properties.Resources.resources
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.csproj.GenerateResource.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.csproj.CoreCompileInputs.cache
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.csproj.CopyComplete
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.exe
+C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\obj\x86\Debug\Ing_progect_6_sem.pdb

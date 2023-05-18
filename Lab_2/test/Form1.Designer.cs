@@ -269,7 +269,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1604, 1160);
+            this.ClientSize = new System.Drawing.Size(1539, 1055);
             this.Controls.Add(this.Save_but);
             this.Controls.Add(this.Open_but);
             this.Controls.Add(this.angleY_bar);
