@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using SharpGL;
 namespace test
 {
     public partial class Kholodilov_3 : Form
