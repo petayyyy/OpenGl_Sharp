@@ -137,6 +137,7 @@ namespace Ing_progect_6_sem
                     Dictionary ff = CvAruco.GetPredefinedDictionary(PredefinedDictionaryName.Dict6X6_1000);
                     var detectorParameters = DetectorParameters.Create();
                     detectorParameters.CornerRefinementMethod = CornerRefineMethod.Subpix;
+                    //detectorParameters.CornerRefinementMethod = CornerRefineMethod.None;
                     detectorParameters.CornerRefinementWinSize = 9;
 
                     // Detect Aruco and draw it
@@ -145,47 +146,25 @@ namespace Ing_progect_6_sem
 
                     if (id_markers.Length > 0)
                     {
-                        
-
                         for (int i = 0; i < id_markers.Length; i++)
                         {
                             Mat rvec = new Mat();
                             Mat tvec = new Mat();
                             Cv2.SolvePnP(objPoints, convert_array(corners_markers[i]), cam_matrix, dis_coef, rvec, tvec);
-                            Cv2.DrawFrameAxes(out_flow, cam_matrix, dis_coef, rvec, tvec, 0.5f);
+                            //Cv2.DrawFrameAxes(out_flow, cam_matrix, dis_coef, rvec, tvec, 0.3f);
                             debug_1.Text = "x: " + Math.Round(tvec.Get<double>(0), 3).ToString() + "; y: " + Math.Round(tvec.Get<double>(1), 3).ToString() + "; z: " + Math.Round(tvec.Get<double>(2), 3).ToString();
-                            Point2f[] pp = corners_markers[i];
-                            int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
-                            int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
-                            Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(0), 3).ToString(), new OpenCvSharp.Point(x_center, y_center), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
-                            Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(1), 3).ToString(), new OpenCvSharp.Point(x_center, y_center + 50), HersheyFonts.HersheySimplex, 0.5d, Scalar.Green);
-                            Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(2), 3).ToString(), new OpenCvSharp.Point(x_center, y_center + 100), HersheyFonts.HersheySimplex, 0.5d, Scalar.Blue);
+                            //Point2f[] pp = corners_markers[i];
+                            //int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
+                            //int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
+                            //Cv2.PutText(out_flow, "*1", new OpenCvSharp.Point(pp[0].X, pp[0].Y), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
+                            //Cv2.PutText(out_flow, "*2", new OpenCvSharp.Point(pp[1].X, pp[1].Y), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
+                            //Cv2.PutText(out_flow, "*3", new OpenCvSharp.Point(pp[2].X, pp[2].Y), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
+                            //Cv2.PutText(out_flow, "*4", new OpenCvSharp.Point(pp[3].X, pp[3].Y), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
+
+                            //Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(0), 3).ToString(), new OpenCvSharp.Point(x_center, y_center), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
+                            //Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(1), 3).ToString(), new OpenCvSharp.Point(x_center, y_center + 25), HersheyFonts.HersheySimplex, 0.5d, Scalar.Green);
+                            //Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(2), 3).ToString(), new OpenCvSharp.Point(x_center, y_center + 50), HersheyFonts.HersheySimplex, 0.5d, Scalar.Blue);
                         }
-                        Mat rvecs = new Mat(), tvecs = new Mat(), objPointsss = new Mat();
-                        // Calculate postion and rotation marker 
-                        CvAruco.EstimatePoseSingleMarkers(corners_markers, 0.105f, cam_matrix, dis_coef, rvecs, tvecs, objPointsss);
-                        for (int i = 0; i < id_markers.Length; i++)
-                        {
-                            
-                            float rvecsVal1 = rvecs.At<float>(i, 0);
-                            float rvecsVal2 = rvecs.At<float>(i, 1);
-                            float rvecsVal3 = rvecs.At<float>(i, 2);
-
-                            double tvecsVal1 = Math.Round(tvecs.At<float>(i, 0), 3);
-                            double tvecsVal2 = Math.Round(tvecs.At<float>(i, 1), 3);
-                            double tvecsVal3 = Math.Round(tvecs.At<float>(i, 2), 3);
-                        debug_2.Text = "x: " + tvecsVal1.ToString() + "; y: " + tvecsVal2.ToString() + "; z: " + tvecsVal3.ToString();
-                        //Point2f[] pp = corners_markers[i];
-                        //int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
-                        //int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
-
-                        //Cv2.PutText(out_flow, tvecsVal1.ToString(), new OpenCvSharp.Point(x_center, y_center), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
-                        //Cv2.PutText(out_flow, tvecsVal2.ToString(), new OpenCvSharp.Point(x_center, y_center + 50), HersheyFonts.HersheySimplex, 0.5d, Scalar.Green);
-                        //Cv2.PutText(out_flow, tvecsVal3.ToString(), new OpenCvSharp.Point(x_center, y_center + 100), HersheyFonts.HersheySimplex, 0.5d, Scalar.Blue);
-
-                        //MessageBox.Show("");
-                    }
-                        
                     }
 
                     Main_picture.Image = BitmapConverter.ToBitmap(out_flow);
