@@ -1,6 +1,6 @@
 ﻿namespace test
 {
-    partial class Kholodilov_2
+    partial class Kholodilov_3
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Kholodilov_2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Kholodilov_3));
             this.Main_box = new System.Windows.Forms.PictureBox();
             this.Start_but = new System.Windows.Forms.Button();
             this.noise = new System.Windows.Forms.NumericUpDown();
@@ -263,7 +263,7 @@
             this.Save_but.UseVisualStyleBackColor = false;
             this.Save_but.Click += new System.EventHandler(this.Save_but_Click);
             // 
-            // Kholodilov_2
+            // Kholodilov_3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -285,8 +285,8 @@
             this.Controls.Add(this.noise);
             this.Controls.Add(this.Start_but);
             this.Controls.Add(this.Main_box);
-            this.Name = "Kholodilov_2";
-            this.Text = "Kholodilov_2";
+            this.Name = "Kholodilov_3";
+            this.Text = "Kholodilov_3";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Main_box)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.noise)).EndInit();

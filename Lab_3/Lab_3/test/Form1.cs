@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 namespace test
 {
-    public partial class Kholodilov_2 : Form
+    public partial class Kholodilov_3 : Form
     {
         Random random = new Random();
         bool is_start_work = false;
@@ -20,7 +20,7 @@ namespace test
         private _3d_transform_point tr_3D = new _3d_transform_point();
         int[] start_mouse_pose;
 
-        public Kholodilov_2()
+        public Kholodilov_3()
         {
             InitializeComponent();
             timer1.Enabled = true;
