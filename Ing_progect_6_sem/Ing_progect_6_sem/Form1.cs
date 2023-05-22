@@ -10,7 +10,6 @@ namespace Ing_progect_6_sem
 {
     public partial class Form1 : Form
     {
-        private bool _run = false;
         private VideoCapture _capture;
         private Mat _image;
         private string _videoFile = @"C:\Users\ilyah\Desktop\test_video\video_1.mp4";

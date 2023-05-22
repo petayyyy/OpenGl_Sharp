@@ -55,7 +55,7 @@
             <param name="vector">Output rotation vector (3x1).</param>
             <param name="jacobian">Optional output Jacobian matrix, 3x9, which is a matrix of partial derivatives of the output array components with respect to the input array components.</param>
         </member>
-        <member name="M:OpenCvSharp.Cv2.FindHomography(OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.HomographyMethods,System.Double,OpenCvSharp.OutputArray,System.Int32,System.Double)">
+        <member name="M:OpenCvSharp.Cv2.FindHomography(OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.HomographyMethods,System.Double,OpenCvSharp.OutputArray)">
             <summary>
             computes the best-fit perspective transformation mapping srcPoints to dstPoints.
             </summary>
@@ -64,11 +64,9 @@
             <param name="method">Method used to computed a homography matrix.</param>
             <param name="ransacReprojThreshold">Maximum allowed reprojection error to treat a point pair as an inlier (used in the RANSAC method only)</param>
             <param name="mask"> Optional output mask set by a robust method ( CV_RANSAC or CV_LMEDS ). Note that the input mask values are ignored.</param>
-            <param name="maxIters">The maximum number of RANSAC iterations.</param>
-            <param name="confidence">Confidence level, between 0 and 1.</param>
             <returns></returns>
         </member>
-        <member name="M:OpenCvSharp.Cv2.FindHomography(System.Collections.Generic.IEnumerable{OpenCvSharp.Point2d},System.Collections.Generic.IEnumerable{OpenCvSharp.Point2d},OpenCvSharp.HomographyMethods,System.Double,OpenCvSharp.OutputArray,System.Int32,System.Double)">
+        <member name="M:OpenCvSharp.Cv2.FindHomography(System.Collections.Generic.IEnumerable{OpenCvSharp.Point2d},System.Collections.Generic.IEnumerable{OpenCvSharp.Point2d},OpenCvSharp.HomographyMethods,System.Double,OpenCvSharp.OutputArray)">
             <summary>
             computes the best-fit perspective transformation mapping srcPoints to dstPoints.
             </summary>
@@ -77,20 +75,7 @@
             <param name="method">Method used to computed a homography matrix.</param>
             <param name="ransacReprojThreshold">Maximum allowed reprojection error to treat a point pair as an inlier (used in the RANSAC method only)</param>
             <param name="mask"> Optional output mask set by a robust method ( CV_RANSAC or CV_LMEDS ). Note that the input mask values are ignored.</param>
-            <param name="maxIters">The maximum number of RANSAC iterations.</param>
-            <param name="confidence">Confidence level, between 0 and 1.</param>
             <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Cv2.FindHomography(OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.OutputArray,OpenCvSharp.UsacParams)">
-            <summary>
-            computes the best-fit perspective transformation mapping srcPoints to dstPoints.
-            </summary>
-            <param name="srcPoints">Coordinates of the points in the original plane, a matrix of the type CV_32FC2</param>
-            <param name="dstPoints">Coordinates of the points in the target plane, a matrix of the type CV_32FC2</param>
-            <param name="mask"> Optional output mask set by a robust method ( CV_RANSAC or CV_LMEDS ). Note that the input mask values are ignored.</param>
-            <param name="params"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:OpenCvSharp.Cv2.RQDecomp3x3(OpenCvSharp.InputArray,OpenCvSharp.OutputArray,OpenCvSharp.OutputArray,OpenCvSharp.OutputArray,OpenCvSharp.OutputArray,OpenCvSharp.OutputArray)">
             <summary>
@@ -3364,12 +3349,6 @@
             </summary>
             <param name="windowName"></param>
         </member>
-        <member name="M:OpenCvSharp.Cv2.InitContainer(System.Object)">
-            <summary>
-            Initialize XAML container panel for use by ImShow
-            </summary>
-            <param name="panel">Panel container.</param>
-        </member>
         <member name="M:OpenCvSharp.Cv2.ImRead(System.String,OpenCvSharp.ImreadModes)">
             <summary>
             Loads an image from a file.
@@ -4460,8 +4439,7 @@
             being added to the component.</param>
             <param name="flags">Operation flags. Lower bits contain a connectivity value, 
             4 (default) or 8, used within the function. Connectivity determines which 
-            neighbors of a pixel are considered. Using FloodFillFlags.MaskOnly will
-            fill in the mask using the grey value 255 (white). </param>
+            neighbors of a pixel are considered. </param>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.Cv2.FloodFill(OpenCvSharp.InputOutputArray,OpenCvSharp.InputOutputArray,OpenCvSharp.Point,OpenCvSharp.Scalar)">
@@ -4504,8 +4482,7 @@
             being added to the component.</param>
             <param name="flags">Operation flags. Lower bits contain a connectivity value, 
             4 (default) or 8, used within the function. Connectivity determines which 
-            neighbors of a pixel are considered. Using FloodFillFlags.MaskOnly will
-            fill in the mask using the grey value 255 (white). </param>
+            neighbors of a pixel are considered. </param>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.Cv2.BlendLinear(OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.OutputArray)">
@@ -5878,6 +5855,23 @@
             Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd. 
             Affect performance linearly: greater searchWindowsSize - greater denoising time. Recommended value 21 pixels</param>
         </member>
+        <member name="M:OpenCvSharp.Cv2.FastNlMeansDenoisingMulti(System.Collections.Generic.IEnumerable{OpenCvSharp.InputArray},OpenCvSharp.OutputArray,System.Int32,System.Int32,System.Single,System.Int32,System.Int32)">
+            <summary>
+            Modification of fastNlMeansDenoising function for images sequence where consequtive images have been captured 
+            in small period of time. For example video. This version of the function is for grayscale images or for manual manipulation with colorspaces.
+            </summary>
+            <param name="srcImgs">Input 8-bit 1-channel, 2-channel or 3-channel images sequence. All images should have the same type and size.</param>
+            <param name="dst"> Output image with the same size and type as srcImgs images.</param>
+            <param name="imgToDenoiseIndex">Target image to denoise index in srcImgs sequence</param>
+            <param name="temporalWindowSize">Number of surrounding images to use for target image denoising. 
+            Should be odd. Images from imgToDenoiseIndex - temporalWindowSize / 2 to imgToDenoiseIndex - temporalWindowSize / 2 
+            from srcImgs will be used to denoise srcImgs[imgToDenoiseIndex] image.</param>
+            <param name="h">Parameter regulating filter strength for luminance component. Bigger h value perfectly removes noise but also removes image details, 
+            smaller h value preserves details but also preserves some noise</param>
+            <param name="templateWindowSize">Size in pixels of the template patch that is used to compute weights. Should be odd. Recommended value 7 pixels</param>
+            <param name="searchWindowSize">Size in pixels of the window that is used to compute weighted average for given pixel. 
+            Should be odd. Affect performance linearly: greater searchWindowsSize - greater denoising time. Recommended value 21 pixels</param>
+        </member>
         <member name="M:OpenCvSharp.Cv2.FastNlMeansDenoisingMulti(System.Collections.Generic.IEnumerable{OpenCvSharp.Mat},OpenCvSharp.OutputArray,System.Int32,System.Int32,System.Single,System.Int32,System.Int32)">
             <summary>
             Modification of fastNlMeansDenoising function for images sequence where consequtive images have been captured 
@@ -5891,6 +5885,23 @@
             from srcImgs will be used to denoise srcImgs[imgToDenoiseIndex] image.</param>
             <param name="h">Parameter regulating filter strength for luminance component. Bigger h value perfectly removes noise but also removes image details, 
             smaller h value preserves details but also preserves some noise</param>
+            <param name="templateWindowSize">Size in pixels of the template patch that is used to compute weights. Should be odd. Recommended value 7 pixels</param>
+            <param name="searchWindowSize">Size in pixels of the window that is used to compute weighted average for given pixel. 
+            Should be odd. Affect performance linearly: greater searchWindowsSize - greater denoising time. Recommended value 21 pixels</param>
+        </member>
+        <member name="M:OpenCvSharp.Cv2.FastNlMeansDenoisingColoredMulti(System.Collections.Generic.IEnumerable{OpenCvSharp.InputArray},OpenCvSharp.OutputArray,System.Int32,System.Int32,System.Single,System.Single,System.Int32,System.Int32)">
+            <summary>
+            Modification of fastNlMeansDenoisingMulti function for colored images sequences
+            </summary>
+            <param name="srcImgs">Input 8-bit 3-channel images sequence. All images should have the same type and size.</param>
+            <param name="dst">Output image with the same size and type as srcImgs images.</param>
+            <param name="imgToDenoiseIndex">Target image to denoise index in srcImgs sequence</param>
+            <param name="temporalWindowSize">Number of surrounding images to use for target image denoising. Should be odd. 
+            Images from imgToDenoiseIndex - temporalWindowSize / 2 to imgToDenoiseIndex - temporalWindowSize / 2 from srcImgs 
+            will be used to denoise srcImgs[imgToDenoiseIndex] image.</param>
+            <param name="h">Parameter regulating filter strength for luminance component. Bigger h value perfectly removes noise 
+            but also removes image details, smaller h value preserves details but also preserves some noise.</param>
+            <param name="hColor"> The same as h but for color components.</param>
             <param name="templateWindowSize">Size in pixels of the template patch that is used to compute weights. Should be odd. Recommended value 7 pixels</param>
             <param name="searchWindowSize">Size in pixels of the window that is used to compute weighted average for given pixel. 
             Should be odd. Affect performance linearly: greater searchWindowsSize - greater denoising time. Recommended value 21 pixels</param>
@@ -6436,36 +6447,6 @@
             Unmanaged OpenCV data pointer
             </summary>
         </member>
-        <member name="T:OpenCvSharp.MatMemoryManager`1">
-            <summary>
-            A MemoryManager over an OpenCvSharpMat
-            </summary>
-            <remarks>The pointer is assumed to be fully unmanaged, or externally pinned - no attempt will be made to pin this data</remarks>
-        </member>
-        <member name="M:OpenCvSharp.MatMemoryManager`1.#ctor(OpenCvSharp.Mat,System.Boolean)">
-            <summary>
-            Create a new UnmanagedMemoryManager instance at the given pointer and size
-            </summary>
-            <remarks>It is assumed that the span provided is already unmanaged or externally pinned</remarks>
-        </member>
-        <member name="M:OpenCvSharp.MatMemoryManager`1.GetSpan">
-            <inheritdoc />
-        </member>
-        <member name="M:OpenCvSharp.MatMemoryManager`1.Pin(System.Int32)">
-            <summary>
-            Provides access to a pointer that represents the data (note: no actual pin occurs)
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.MatMemoryManager`1.Unpin">
-            <summary>
-            Has no effect
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.MatMemoryManager`1.Dispose(System.Boolean)">
-            <summary>
-            Releases all resources associated with this object
-            </summary>
-        </member>
         <member name="T:OpenCvSharp.OpenCVException">
             <summary>
             The default exception to be thrown by OpenCV 
@@ -6595,52 +6576,9 @@
             <param name="scalar">scalar</param>
             <returns></returns>
         </member>
-        <member name="M:OpenCvSharp.ResourcesTracker.NewUMat">
-            <summary>
-            Create a new UMat instance, and trace it
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.ResourcesTracker.NewUMat(OpenCvSharp.Size,OpenCvSharp.MatType,OpenCvSharp.Scalar)">
-            <summary>
-             Create a new UMat instance, and trace it
-            </summary>
-            <param name="size">size</param>
-            <param name="matType">matType</param>
-            <param name="scalar">scalar</param>
-            <returns></returns>
-        </member>
         <member name="M:OpenCvSharp.ResourcesTracker.Dispose">
             <summary>
             Dispose all traced objects
-            </summary>
-        </member>
-        <member name="T:OpenCvSharp.Internal.ExceptionHandler">
-            <summary>
-            This static class defines one instance which than can be used by multiple threads to gather exception information from OpenCV
-            Implemented as a singleton
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.Internal.ExceptionHandler.ErrorHandlerCallback">
-            <summary>
-            Callback function invoked by OpenCV when exception occurs 
-            Stores the information locally for every thread
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Internal.ExceptionHandler.RegisterExceptionCallback">
-            <summary>
-            Registers the callback function to OpenCV, so exception caught before the p/invoke boundary 
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Internal.ExceptionHandler.ThrowPossibleException">
-            <summary>
-            Throws appropriate exception if one happened
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Internal.ExceptionHandler.CheckForException">
-            <summary>
-            Returns a boolean which indicates if an exception occured for the current thread
-            Reading this value changes its state, so an exception is handled only once
             </summary>
         </member>
         <member name="T:OpenCvSharp.Internal.ExceptionStatus">
@@ -6689,12 +6627,6 @@
         <member name="M:OpenCvSharp.Internal.NativeMethods.IsMono">
             <summary>
             Returns whether the runtime is Mono or not
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Internal.NativeMethods.IsWasm">
-            <summary>
-            Returns whether the architecture is Wasm or not
             </summary>
             <returns></returns>
         </member>
@@ -6791,13 +6723,13 @@
         </member>
         <member name="M:OpenCvSharp.Internal.WindowsLibraryLoader.IsCurrentPlatformSupported">
             <summary>
-            Determine if the OS is Windows
+            
             </summary>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.Internal.WindowsLibraryLoader.IsDotNetCore">
             <summary>
-            Determine if the runtime is .NET Core
+            
             </summary>
             <returns></returns>
         </member>
@@ -6870,14 +6802,6 @@
         <member name="M:OpenCvSharp.Internal.Util.ArrayAddress2`1.GetDim2Lengths">
             <summary> 
             </summary>
-        </member>
-        <member name="M:OpenCvSharp.Internal.Util.EnumerableExtensions.CastOrToArray``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            enumerable as T[] ?? enumerable.ToArray()
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="enumerable"></param>
-            <returns></returns>
         </member>
         <member name="T:OpenCvSharp.Internal.Util.PInvokeHelper">
             <summary>
@@ -8206,6 +8130,27 @@
             <param name="borderColor">color of marker borders. Rest of colors (text color and first corner color)
              are calculated based on this one to improve visualization.</param>
         </member>
+        <member name="M:OpenCvSharp.Aruco.CvAruco.DrawMarker(OpenCvSharp.Aruco.Dictionary,System.Int32,System.Int32,OpenCvSharp.OutputArray,System.Int32)">
+            <summary>
+            Draw a canonical marker image
+            </summary>
+            <param name="dictionary">dictionary of markers indicating the type of markers</param>
+            <param name="id">identifier of the marker that will be returned. It has to be a valid id in the specified dictionary.</param>
+            <param name="sidePixels">size of the image in pixels</param>
+            <param name="mat">output image with the marker</param>
+            <param name="borderBits">width of the marker border.</param>
+        </member>
+        <member name="M:OpenCvSharp.Aruco.CvAruco.DrawAxis(OpenCvSharp.InputOutputArray,OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.InputArray,System.Single)">
+            <summary>
+            Draw coordinate system axis from pose estimation.
+            </summary>
+            <param name="image">input/output image. It must have 1 or 3 channels. The number of channels is not altered.</param>
+            <param name="cameraMatrix">input 3x3 floating-point camera matrix</param>
+            <param name="distCoeffs">vector of distortion coefficients (k1,k2,p1,p2[,k3[,k4,k5,k6],[s1,s2,s3,s4]]) of 4, 5, 8 or 12 elements</param>
+            <param name="rvec">rotation vector of the coordinate system that will be drawn.</param>
+            <param name="tvec">translation vector of the coordinate system that will be drawn.</param>
+            <param name="length">length of the painted axis in the same unit than tvec (usually in meters)</param>
+        </member>
         <member name="M:OpenCvSharp.Aruco.CvAruco.GetPredefinedDictionary(OpenCvSharp.Aruco.PredefinedDictionaryName)">
             <summary>
             Returns one of the predefined dictionaries defined in PREDEFINED_DICTIONARY_NAME
@@ -8248,185 +8193,167 @@
             Parameters for the detectMarker process
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshWinSizeMin">
+        <member name="M:OpenCvSharp.Aruco.DetectorParameters.Create">
+            <summary> 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshWinSizeMin">
             <summary>
             minimum window size for adaptive thresholding before finding contours (default 3).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshWinSizeMax">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshWinSizeMax">
             <summary>
             adaptiveThreshWinSizeMax: maximum window size for adaptive thresholding before finding contours(default 23).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshWinSizeStep">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshWinSizeStep">
             <summary>
             increments from adaptiveThreshWinSizeMin to adaptiveThreshWinSizeMax during the thresholding(default 10).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshConstant">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AdaptiveThreshConstant">
             <summary>
             constant for adaptive thresholding before finding contours (default 7)
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MinMarkerPerimeterRate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MinMarkerPerimeterRate">
             <summary>
             determine minimum perimeter for marker contour to be detected. 
             This is defined as a rate respect to the maximum dimension of the input image(default 0.03).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MaxMarkerPerimeterRate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MaxMarkerPerimeterRate">
             <summary>
              determine maximum perimeter for marker contour to be detected. 
             This is defined as a rate respect to the maximum dimension of the input image(default 4.0).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.PolygonalApproxAccuracyRate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.PolygonalApproxAccuracyRate">
             <summary>
             minimum accuracy during the polygonal approximation process to determine which contours are squares.
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MinCornerDistanceRate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MinCornerDistanceRate">
             <summary>
             minimum distance between corners for detected markers relative to its perimeter(default 0.05)
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MinDistanceToBorder">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MinDistanceToBorder">
             <summary>
              minimum distance of any corner to the image border for detected markers (in pixels) (default 3)
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MinMarkerDistanceRate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MinMarkerDistanceRate">
             <summary>
             minimum mean distance between two marker corners to be considered similar, 
             so that the smaller one is removed.The rate is relative to the smaller perimeter of the two markers(default 0.05).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementMethod">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementMethod">
             <summary>
             corner refinement method.
             (CORNER_REFINE_NONE, no refinement. CORNER_REFINE_SUBPIX, do subpixel refinement. CORNER_REFINE_CONTOUR use contour-Points)
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementWinSize">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementWinSize">
             <summary>
             window size for the corner refinement process (in pixels) (default 5).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementMaxIterations">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementMaxIterations">
             <summary>
             maximum number of iterations for stop criteria of the corner refinement process(default 30).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementMinAccuracy">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.CornerRefinementMinAccuracy">
             <summary>
             minimum error for the stop criteria of the corner refinement process(default: 0.1)
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MarkerBorderBits">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MarkerBorderBits">
             <summary>
             number of bits of the marker border, i.e. marker border width (default 1).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.PerspectiveRemovePixelPerCell">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.PerspectiveRemovePixelPerCell">
             <summary>
             number of bits (per dimension) for each cell of the marker when removing the perspective(default 8).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.PerspectiveRemoveIgnoredMarginPerCell">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.PerspectiveRemoveIgnoredMarginPerCell">
             <summary>
             width of the margin of pixels on each cell not considered for the determination 
             of the cell bit.Represents the rate respect to the total  size of the cell, 
             i.e. perspectiveRemovePixelPerCell (default 0.13)
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MaxErroneousBitsInBorderRate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MaxErroneousBitsInBorderRate">
             <summary>
             maximum number of accepted erroneous bits in the border 
             (i.e. number of allowed white bits in the border). Represented as a rate respect to the total 
             number of bits per marker(default 0.35).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MinOtsuStdDev">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.MinOtsuStdDev">
             <summary>
             minimun standard deviation in pixels values during the decodification step to
              apply Otsu thresholding(otherwise, all the bits are set to 0 or 1 depending on mean higher than 128 or not) (default 5.0)
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.ErrorCorrectionRate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.ErrorCorrectionRate">
             <summary>
             errorCorrectionRate error correction rate respect to the maximun error correction capability for each dictionary. (default 0.6).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagQuadDecimate">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagQuadDecimate">
             <summary>
             Detection of quads can be done on a lower-resolution image, improving speed at a cost of pose accuracy and a slight decrease in detection rate.
             Decoding the binary payload is still done at full resolution.
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagQuadSigma">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagQuadSigma">
             <summary>
             What Gaussian blur should be applied to the segmented image (used for quad detection?) Parameter is the standard deviation in pixels.
             Very noisy images benefit from non-zero values (e.g. 0.8).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagMinClusterPixels">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagMinClusterPixels">
             <summary>
             reject quads containing too few pixels.
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagMaxNmaxima">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagMaxNmaxima">
             <summary>
             how many corner candidates to consider when segmenting a group of pixels into a quad.
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagCriticalRad">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagCriticalRad">
             <summary>
             Reject quads where pairs of edges have angles that are close to straight or close to 180 degrees. Zero means that no quads are rejected. (In radians).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagMaxLineFitMse">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagMaxLineFitMse">
             <summary>
             When fitting lines to the contours, what is the maximum mean squared error allowed?
             This is useful in rejecting contours that are far from being quad shaped; rejecting these quads "early" saves expensive decoding processing.
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagMinWhiteBlackDiff">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagDeglitch">
+            <summary>
+            should the thresholded image be deglitched? Only useful for very noisy images
+            </summary>
+        </member>
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.AprilTagMinWhiteBlackDiff">
             <summary>
             When we build our model of black &amp; white pixels, we add an extra check that the white model must be (overall) brighter than the black model.
             How much brighter? (in pixel values, [0,255]).
             </summary>
         </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.AprilTagDeglitch">
-            <summary>
-            should the thresholded image be deglitched? Only useful for very noisy images
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.DetectInvertedMarker">
+        <member name="P:OpenCvSharp.Aruco.DetectorParameters.DetectInvertedMarker">
             <summary>
             to check if there is a white marker. In order to generate a "white" marker just invert a normal marker by using a tilde, ~markerImage. (default false)
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.UseAruco3Detection">
-            <summary>
-            enable the new and faster Aruco detection strategy.
-            Proposed in the paper:
-            * Romero-Ramirez et al: Speeded up detection of squared fiducial markers (2018)
-            * https://www.researchgate.net/publication/325787310_Speeded_Up_Detection_of_Squared_Fiducial_Markers
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MinSideLengthCanonicalImg">
-            <summary>
-            minimum side length of a marker in the canonical image. Latter is the binarized image in which contours are searched. 
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.Aruco.DetectorParameters.MinMarkerLengthRatioOriginalImg">
-            <summary>
-            range [0,1], eq (2) from paper. The parameter tau_i has a direct influence on the processing speed.
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Aruco.DetectorParameters.#ctor">
-            <summary>
-            Constructor
             </summary>
         </member>
         <member name="T:OpenCvSharp.Aruco.Dictionary">
@@ -8434,14 +8361,19 @@
             Dictionary/Set of markers. It contains the inner codification
             </summary>
         </member>
+        <member name="P:OpenCvSharp.Aruco.Dictionary.ObjectPtr">
+            <summary>
+            cv::Ptr&lt;T&gt;
+            </summary>
+        </member>
         <member name="M:OpenCvSharp.Aruco.Dictionary.#ctor(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:OpenCvSharp.Aruco.Dictionary.DisposeUnmanaged">
+        <member name="M:OpenCvSharp.Aruco.Dictionary.DisposeManaged">
             <summary>
-            Releases unmanaged resources
+            Releases managed resources
             </summary>
         </member>
         <member name="P:OpenCvSharp.Aruco.Dictionary.BytesList">
@@ -8458,51 +8390,6 @@
             <summary>
             Maximum number of bits that can be corrected.
             </summary>
-        </member>
-        <member name="M:OpenCvSharp.Aruco.Dictionary.Identify(OpenCvSharp.Mat,System.Int32@,System.Int32@,System.Double)">
-            <summary>
-            Given a matrix of bits. Returns whether if marker is identified or not.
-            It returns by reference the correct id (if any) and the correct rotation
-            </summary>
-            <param name="onlyBits"></param>
-            <param name="idx"></param>
-            <param name="rotation"></param>
-            <param name="maxCorrectionRate"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Aruco.Dictionary.GetDistanceToId(OpenCvSharp.InputArray,System.Int32,System.Boolean)">
-            <summary>
-            Returns the distance of the input bits to the specific id.
-            If allRotations is true, the four possible bits rotation are considered
-            </summary>
-            <param name="bits"></param>
-            <param name="id"></param>
-            <param name="allRotations"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Aruco.Dictionary.GenerateImageMarker(System.Int32,System.Int32,OpenCvSharp.OutputArray,System.Int32)">
-            <summary>
-            Generate a canonical marker image
-            </summary>
-            <param name="id"></param>
-            <param name="sidePixels"></param>
-            <param name="img"></param>
-            <param name="borderBits"></param>
-        </member>
-        <member name="M:OpenCvSharp.Aruco.Dictionary.GetByteListFromBits(OpenCvSharp.Mat)">
-            <summary>
-            Transform matrix of bits to list of bytes in the 4 rotations
-            </summary>
-            <param name="bits"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Aruco.Dictionary.GetBitsFromByteList(OpenCvSharp.Mat,System.Int32)">
-            <summary>
-            Transform list of bytes to matrix of bits
-            </summary>
-            <param name="byteList"></param>
-            <param name="markerSize"></param>
-            <returns></returns>
         </member>
         <member name="T:OpenCvSharp.Aruco.CornerRefineMethod">
             <summary>
@@ -8910,41 +8797,6 @@
         <member name="F:OpenCvSharp.HomographyMethods.Rho">
             <summary>
             RHO algorithm
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.HomographyMethods.USAC_DEFAULT">
-            <summary>
-            USAC algorithm, default settings
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.HomographyMethods.USAC_PARALLEL">
-            <summary>
-            USAC, parallel version
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.HomographyMethods.USAC_FM_8PTS">
-            <summary>
-            USAC, fundamental matrix 8 points
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.HomographyMethods.USAC_FAST">
-            <summary>
-            USAC, fast settings
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.HomographyMethods.USAC_ACCURATE">
-            <summary>
-            USAC, accurate settings
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.HomographyMethods.USAC_PROSAC">
-            <summary>
-            USAC, sorted points, runs PROSAC
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.HomographyMethods.USAC_MAGSAC">
-            <summary>
-            USAC, runs MAGSAC++
             </summary>
         </member>
         <member name="T:OpenCvSharp.ProjectionType">
@@ -13808,13 +13660,6 @@
             Runs the given functor over all matrix elements in parallel.
             </summary>
             <param name="operation"></param>
-        </member>
-        <member name="M:OpenCvSharp.Mat.AsSpan``1">
-            <summary>
-            Creates a new span over the Mat.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
         </member>
         <member name="M:OpenCvSharp.Mat.Abs">
             <summary>
@@ -27763,27 +27608,6 @@
             thus, can be used directly for pixel interpolation. Otherwise, the function finds the inverse transform from map_matrix. 
             </summary>
         </member>
-        <member name="T:OpenCvSharp.LineSegmentDetectorModes">
-            <summary>
-            Variants of Line Segment %Detector
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.LineSegmentDetectorModes.RefineNone">
-            <summary>
-            No refinement applied
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.LineSegmentDetectorModes.RefineStd">
-            <summary>
-            Standard refinement is applied. E.g. breaking arches into smaller straighter line approximations.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.LineSegmentDetectorModes.RefineAdv">
-            <summary>
-            Advanced refinement. Number of false alarms is calculated, lines are
-            refined through increase of precision, decrement in size, etc.
-            </summary>
-        </member>
         <member name="T:OpenCvSharp.LineTypes">
             <summary>
             Type of the line
@@ -28322,117 +28146,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:OpenCvSharp.Segmentation.IntelligentScissorsMB">
-            <summary>
-            Intelligent Scissors image segmentation
-            
-            This class is used to find the path (contour) between two points
-            which can be used for image segmentation.
-            
-            Usage example:
-            @snippet snippets/imgproc_segmentation.cpp usage_example_intelligent_scissors
-            
-            Reference: Intelligent Scissors for Image Composition http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.138.3811&amp;rep=rep1&amp;type=pdf
-            algorithm designed by Eric N. Mortensen and William A. Barrett, Brigham Young University
-            @cite Mortensen95intelligentscissors
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.DisposeUnmanaged">
-            <summary>
-            Releases unmanaged resources
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.SetWeights(System.Single,System.Single,System.Single)">
-            <summary>
-            Specify weights of feature functions
-            
-            Consider keeping weights normalized (sum of weights equals to 1.0)
-            Discrete dynamic programming (DP) goal is minimization of costs between pixels.
-            </summary>
-            <param name="weightNonEdge">Specify cost of non-edge pixels (default: 0.43f)</param>
-            <param name="weightGradientDirection">Specify cost of gradient direction function (default: 0.43f)</param>
-            <param name="weightGradientMagnitude">Specify cost of gradient magnitude function (default: 0.14f)</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.SetGradientMagnitudeMaxLimit(System.Single)">
-            <summary>
-            Specify gradient magnitude max value threshold
-            
-            Zero limit value is used to disable gradient magnitude thresholding (default behavior, as described in original article).
-            Otherwize pixels with `gradient magnitude >= threshold` have zero cost.
-            
-            @note Thresholding should be used for images with irregular regions (to avoid stuck on parameters from high-contract areas, like embedded logos).
-            </summary>
-            <param name="gradientMagnitudeThresholdMax">Specify gradient magnitude max value threshold (default: 0, disabled)</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.SetEdgeFeatureZeroCrossingParameters(System.Single)">
-            <summary>
-            Switch to "Laplacian Zero-Crossing" edge feature extractor and specify its parameters
-            
-            This feature extractor is used by default according to article.
-            
-            Implementation has additional filtering for regions with low-amplitude noise.
-            This filtering is enabled through parameter of minimal gradient amplitude (use some small value 4, 8, 16).
-            
-            @note Current implementation of this feature extractor is based on processing of grayscale images (color image is converted to grayscale image first).
-            
-            @note Canny edge detector is a bit slower, but provides better results (especially on color images): use setEdgeFeatureCannyParameters().
-            </summary>
-            <param name="gradientMagnitudeMinValue">Minimal gradient magnitude value for edge pixels (default: 0, check is disabled)</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.SetEdgeFeatureCannyParameters(System.Double,System.Double,System.Int32,System.Boolean)">
-            <summary>
-            Switch edge feature extractor to use Canny edge detector
-            Note: "Laplacian Zero-Crossing" feature extractor is used by default (following to original article)
-            </summary>
-            <param name="threshold1"></param>
-            <param name="threshold2"></param>
-            <param name="apertureSize"></param>
-            <param name="l2gradient"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.ApplyImage(OpenCvSharp.InputArray)">
-            <summary>
-            Specify input image and extract image features
-            </summary>
-            <param name="image">input image. Type is #CV_8UC1 / #CV_8UC3</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.ApplyImageFeatures(OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.InputArray)">
-            <summary>
-            Specify custom features of imput image
-            Customized advanced variant of applyImage() call.
-            </summary>
-            <param name="nonEdge">Specify cost of non-edge pixels. Type is CV_8UC1. Expected values are `{0, 1}`.</param>
-            <param name="gradientDirection">Specify gradient direction feature. Type is CV_32FC2. Values are expected to be normalized: `x^2 + y^2 == 1`</param>
-            <param name="gradientMagnitude">Specify cost of gradient magnitude function: Type is CV_32FC1. Values should be in range `[0, 1]`.</param>
-            <param name="image">Optional parameter. Must be specified if subset of features is specified (non-specified features are calculated internally)</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.BuildMap(OpenCvSharp.Point)">
-            <summary>
-            Prepares a map of optimal paths for the given source point on the image
-            Note: applyImage() / applyImageFeatures() must be called before this call
-            </summary>
-            <param name="sourcePt">The source point used to find the paths</param>
-        </member>
-        <member name="M:OpenCvSharp.Segmentation.IntelligentScissorsMB.GetContour(OpenCvSharp.Point,OpenCvSharp.OutputArray,System.Boolean)">
-            <summary>
-            Extracts optimal contour for the given target point on the image
-            Note: buildMap() must be called before this call
-            </summary>
-            <param name="targetPt">The target point</param>
-            <param name="contour">contour The list of pixels which contains optimal path between the source and the target points of the image. 
-            Type is CV_32SC2 (compatible with `std::vector&lt;Point&gt;`)</param>
-            <param name="backward">Flag to indicate reverse order of retrived pixels (use "true" value to fetch points from the target to the source point)</param>
-        </member>
         <member name="T:OpenCvSharp.LineIterator">
             <summary>
             Contrast Limited Adaptive Histogram Equalization
@@ -28557,87 +28270,6 @@
             </summary>
             <param name="pos"></param>
             <param name="ptr"></param>
-        </member>
-        <member name="T:OpenCvSharp.LineSegmentDetector">
-            <summary>
-            Line segment detector class
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.LineSegmentDetector.ptrObj">
-            <summary>
-            cv::Ptr&lt;LineSegmentDetector&gt;
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.LineSegmentDetector.#ctor(System.IntPtr)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.LineSegmentDetector.Create(OpenCvSharp.LineSegmentDetectorModes,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Int32)">
-            <summary>
-            Creates a smart pointer to a LineSegmentDetector object and initializes it.
-            </summary>
-            <param name="refine">The way found lines will be refined, see cv::LineSegmentDetectorModes</param>
-            <param name="scale">The scale of the image that will be used to find the lines. Range (0..1].</param>
-            <param name="sigmaScale">Sigma for Gaussian filter. It is computed as sigma = _sigma_scale/_scale.</param>
-            <param name="quant">Bound to the quantization error on the gradient norm.</param>
-            <param name="angTh">Gradient angle tolerance in degrees.</param>
-            <param name="logEps">Detection threshold: -log10(NFA) \> log_eps. 
-            Used only when advancent refinement is chosen.</param>
-            <param name="densityTh">Minimal density of aligned region points in the enclosing rectangle.</param>
-            <param name="nBins">Number of bins in pseudo-ordering of gradient modulus.</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.LineSegmentDetector.DisposeManaged">
-            <summary>
-            Releases managed resources
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.LineSegmentDetector.Detect(OpenCvSharp.InputArray,OpenCvSharp.OutputArray,OpenCvSharp.OutputArray,OpenCvSharp.OutputArray,OpenCvSharp.OutputArray)">
-            <summary>
-            Finds lines in the input image.
-            This is the output of the default parameters of the algorithm on the above shown image.
-            </summary>
-            <param name="image">A grayscale (CV_8UC1) input image. </param>
-            <param name="lines">A vector of Vec4i or Vec4f elements specifying the beginning and ending point of a line. 
-            Where Vec4i/Vec4f is (x1, y1, x2, y2), point 1 is the start, point 2 - end. Returned lines are strictly oriented depending on the gradient.</param>
-            <param name="width">Vector of widths of the regions, where the lines are found. E.g. Width of line.</param>
-            <param name="prec">Vector of precisions with which the lines are found.</param>
-            <param name="nfa">Vector containing number of false alarms in the line region, 
-            with precision of 10%. The bigger the value, logarithmically better the detection.</param>
-        </member>
-        <member name="M:OpenCvSharp.LineSegmentDetector.Detect(OpenCvSharp.InputArray,OpenCvSharp.Vec4f[]@,System.Double[]@,System.Double[]@,System.Double[]@)">
-            <summary>
-            Finds lines in the input image.
-            This is the output of the default parameters of the algorithm on the above shown image.
-            </summary>
-            <param name="image">A grayscale (CV_8UC1) input image. </param>
-            <param name="lines">A vector of Vec4i or Vec4f elements specifying the beginning and ending point of a line. 
-            Where Vec4i/Vec4f is (x1, y1, x2, y2), point 1 is the start, point 2 - end. Returned lines are strictly oriented depending on the gradient.</param>
-            <param name="width">Vector of widths of the regions, where the lines are found. E.g. Width of line.</param>
-            <param name="prec">Vector of precisions with which the lines are found.</param>
-            <param name="nfa">Vector containing number of false alarms in the line region, 
-            with precision of 10%. The bigger the value, logarithmically better the detection.</param>
-        </member>
-        <member name="M:OpenCvSharp.LineSegmentDetector.DrawSegments(OpenCvSharp.InputOutputArray,OpenCvSharp.InputArray)">
-            <summary>
-            Draws the line segments on a given image.
-            </summary>
-            <param name="image">The image, where the liens will be drawn. 
-            Should be bigger or equal to the image, where the lines were found.</param>
-            <param name="lines">A vector of the lines that needed to be drawn.</param>
-        </member>
-        <member name="M:OpenCvSharp.LineSegmentDetector.CompareSegments(OpenCvSharp.Size,OpenCvSharp.InputArray,OpenCvSharp.InputArray,OpenCvSharp.InputOutputArray)">
-            <summary>
-            Draws two groups of lines in blue and red, counting the non overlapping (mismatching) pixels.
-            </summary>
-            <param name="size">The size of the image, where lines1 and lines2 were found.</param>
-            <param name="lines1">The first group of lines that needs to be drawn. It is visualized in blue color.</param>
-            <param name="lines2">The second group of lines. They visualized in red color.</param>
-            <param name="image">Optional image, where the lines will be drawn. 
-            The image should be color(3-channel) in order for lines1 and lines2 to be drawn 
-            in the above mentioned colors.</param>
-            <returns></returns>
         </member>
         <member name="T:OpenCvSharp.CircleSegment">
             <summary>
@@ -31105,6 +30737,12 @@
             Type of a %SVM kernel. See SVM::KernelTypes. Default value is SVM::RBF.
             </summary>
         </member>
+        <member name="M:OpenCvSharp.ML.SVM.SetCustomKernel(OpenCvSharp.ML.SVM.Kernel)">
+            <summary>
+            Initialize with custom kernel.
+            </summary>
+            <param name="kernel"></param>
+        </member>
         <member name="M:OpenCvSharp.ML.SVM.TrainAuto(OpenCvSharp.ML.TrainData,System.Int32,System.Nullable{OpenCvSharp.ML.ParamGrid},System.Nullable{OpenCvSharp.ML.ParamGrid},System.Nullable{OpenCvSharp.ML.ParamGrid},System.Nullable{OpenCvSharp.ML.ParamGrid},System.Nullable{OpenCvSharp.ML.ParamGrid},System.Nullable{OpenCvSharp.ML.ParamGrid},System.Boolean)">
             <summary>
             Trains an %SVM with optimal parameters.
@@ -31153,6 +30791,16 @@
             <param name="paramId">SVM parameters IDs that must be one of the SVM::ParamTypes. 
             The grid is generated for the parameter with this ID.</param>
             <returns></returns>
+        </member>
+        <member name="T:OpenCvSharp.ML.SVM.Kernel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OpenCvSharp.ML.SVM.Kernel.#ctor">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:OpenCvSharp.ML.SVM.Types">
             <summary>
@@ -31396,12 +31044,12 @@
             <param name="probs">Optional output matrix that contains posterior probabilities of each component
             given the sample. It has \f$1 \times nclusters\f$ size and CV_64FC1 type.</param>
         </member>
-        <member name="T:OpenCvSharp.EMTypes">
+        <member name="T:OpenCvSharp.EM.Types">
             <summary>
             Type of covariation matrices
             </summary>
         </member>
-        <member name="F:OpenCvSharp.EMTypes.CovMatSpherical">
+        <member name="F:OpenCvSharp.EM.Types.CovMatSpherical">
             <summary>
             A scaled identity matrix \f$\mu_k * I\f$. 
             There is the only parameter \f$\mu_k\f$ to be estimated for each matrix. 
@@ -31411,14 +31059,14 @@
             passed again to the optimization procedure, this time with covMatType=EM::COV_MAT_DIAGONAL.
             </summary>
         </member>
-        <member name="F:OpenCvSharp.EMTypes.CovMatDiagonal">
+        <member name="F:OpenCvSharp.EM.Types.CovMatDiagonal">
             <summary>
             A diagonal matrix with positive diagonal elements. 
             The number of free parameters is d for each matrix. 
             This is most commonly used option yielding good estimation results. 
             </summary>
         </member>
-        <member name="F:OpenCvSharp.EMTypes.CovMatGeneric">
+        <member name="F:OpenCvSharp.EM.Types.CovMatGeneric">
             <summary>
             A symmetric positively defined matrix. The number of free parameters in each 
             matrix is about \f$d^2/2\f$. It is not recommended to use this option, unless 
@@ -31426,17 +31074,17 @@
             of training samples.
             </summary>
         </member>
-        <member name="F:OpenCvSharp.EMTypes.CovMatDefault">
+        <member name="F:OpenCvSharp.EM.Types.CovMatDefault">
             <summary>
             
             </summary>
         </member>
-        <member name="T:OpenCvSharp.EMStartStep">
+        <member name="T:OpenCvSharp.EM.StartStep">
             <summary>
             The initial step the algorithm starts from
             </summary>
         </member>
-        <member name="F:OpenCvSharp.EMStartStep.E">
+        <member name="F:OpenCvSharp.EM.StartStep.E">
             <summary>
             The algorithm starts with E-step. 
             At least, the initial values of mean vectors, CvEMParams.Means must be passed. 
@@ -31445,13 +31093,13 @@
             [CvEM::START_E_STEP]
             </summary>
         </member>
-        <member name="F:OpenCvSharp.EMStartStep.M">
+        <member name="F:OpenCvSharp.EM.StartStep.M">
             <summary>
             The algorithm starts with M-step. The initial probabilities p_i,k must be provided.
             [CvEM::START_M_STEP]
             </summary>
         </member>
-        <member name="F:OpenCvSharp.EMStartStep.Auto">
+        <member name="F:OpenCvSharp.EM.StartStep.Auto">
             <summary>
             No values are required from the user, k-means algorithm is used to estimate initial mixtures parameters. 
             [CvEM::START_AUTO_STEP]
@@ -31492,12 +31140,6 @@
             The file may contain an old HAAR classifier trained by the haartraining application 
             or a new cascade classifier trained by the traincascade application.</param>
             <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CascadeClassifier.Read(OpenCvSharp.FileNode)">
-            <summary>
-            Reads a classifier parameters from a file storage
-            </summary>
-            <param name="fn"></param>
         </member>
         <member name="M:OpenCvSharp.CascadeClassifier.DetectMultiScale(OpenCvSharp.Mat,System.Double,System.Int32,OpenCvSharp.HaarDetectionTypes,System.Nullable{OpenCvSharp.Size},System.Nullable{OpenCvSharp.Size})">
             <summary>
@@ -32124,12 +31766,12 @@
         </member>
         <member name="T:OpenCvSharp.CalibrateDebevec">
             <summary>
-            CalibrateDebevec object
+            The base class for camera response calibration algorithms.
             </summary>
         </member>
         <member name="M:OpenCvSharp.CalibrateDebevec.#ctor(System.IntPtr)">
             <summary>
-            Creates instance by raw pointer cv::CalibrateDebevec*
+            Creates instance by raw pointer cv::ml::Boost*
             </summary>
         </member>
         <member name="M:OpenCvSharp.CalibrateDebevec.Create(System.Int32,System.Single,System.Boolean)">
@@ -32146,59 +31788,6 @@
         <member name="M:OpenCvSharp.CalibrateDebevec.DisposeManaged">
             <summary>
             Releases managed resources
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.CalibrateDebevec.Lambda">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.CalibrateDebevec.Samples">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.CalibrateDebevec.Random">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:OpenCvSharp.CalibrateRobertson">
-            <summary>
-            CalibrateRobertson object
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.CalibrateRobertson.#ctor(System.IntPtr)">
-            <summary>
-            Creates instance by raw pointer cv::CalibrateRobertson*
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.CalibrateRobertson.Create(System.Int32,System.Single)">
-            <summary>
-            Creates CalibrateRobertson object
-            </summary>
-            <param name="maxIter">maximal number of Gauss-Seidel solver iterations.</param>
-            <param name="threshold">target difference between results of two successive steps of the minimization.</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.CalibrateRobertson.DisposeManaged">
-            <summary>
-            Releases managed resources
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.CalibrateRobertson.MaxIter">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.CalibrateRobertson.Threshold">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.CalibrateRobertson.Radiance">
-            <summary>
-            
             </summary>
         </member>
         <member name="T:OpenCvSharp.EdgePreservingMethods">
@@ -34015,41 +33604,6 @@
             
             </summary>
         </member>
-        <member name="T:OpenCvSharp.VideoAccelerationType">
-            <summary>
-            Video Acceleration type
-            Used as value in #CAP_PROP_HW_ACCELERATION and #VIDEOWRITER_PROP_HW_ACCELERATION
-            note In case of FFmpeg backend, it translated to enum AVHWDeviceType (https://github.com/FFmpeg/FFmpeg/blob/master/libavutil/hwcontext.h)
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoAccelerationType.None">
-            <summary>
-            Do not require any specific H/W acceleration, prefer software processing.
-            Reading of this value means that special H/W accelerated handling is not added or not detected by OpenCV.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoAccelerationType.Any">
-            <summary>
-            Prefer to use H/W acceleration. If no one supported, then fallback to software processing.
-            note H/W acceleration may require special configuration of used environment.
-            note Results in encoding scenario may differ between software and hardware accelerated encoders.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoAccelerationType.D3D11">
-            <summary>
-            DirectX 11
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoAccelerationType.VAAPI">
-            <summary>
-            VAAPI
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoAccelerationType.MFX">
-            <summary>
-            libmfx (Intel MediaSDK/oneVPL)
-            </summary>
-        </member>
         <member name="T:OpenCvSharp.VideoCaptureAPIs">
             <summary>
             Camera device types
@@ -34211,41 +33765,6 @@
         <member name="F:OpenCvSharp.VideoCaptureAPIs.CAP_UEYE">
             <summary>
             uEye Camera API
-            </summary>
-        </member>
-        <member name="T:OpenCvSharp.VideoCapturePara">
-            <summary>
-            Parameters of VideoCature for hardware acceleration
-            Please check the link below for current HW acceleration types support matrix
-            https://github.com/opencv/opencv/wiki/Video-IO-hardware-acceleration
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.VideoCapturePara.AccelerationType">
-            <summary>
-            Used as value in #CAP_PROP_HW_ACCELERATION and #VIDEOWRITER_PROP_HW_ACCELERATION
-            note In case of FFmpeg backend, it translated to enum AVHWDeviceType (https://github.com/FFmpeg/FFmpeg/blob/master/libavutil/hwcontext.h)
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.VideoCapturePara.HwDeviceIndex">
-            <summary>
-            Hardware device index (select GPU if multiple available). Device enumeration is acceleration type specific.
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.VideoCapturePara.#ctor">
-            <summary>
-            Constructor, parameter of VideoCature for hardware acceleration
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.VideoCapturePara.#ctor(OpenCvSharp.VideoAccelerationType,System.Int32)">
-            <summary>
-            Constructor, parameter of VideoCature for hardware acceleration
-            </summary>
-            <param name="videoAcceleration">Video Acceleration type</param>
-            <param name="deviceIndex">Hardware device index </param>
-        </member>
-        <member name="M:OpenCvSharp.VideoCapturePara.GetParameters">
-            <summary>
-            Get parameters of VideoCature for hardware acceleration
             </summary>
         </member>
         <member name="T:OpenCvSharp.VideoCaptureProperties">
@@ -34500,18 +34019,6 @@
         <member name="F:OpenCvSharp.VideoCaptureProperties.OrientationAuto">
             <summary>
             if true - rotates output frames of CvCapture considering video file's metadata  (applicable for FFmpeg back-end only) (https://github.com/opencv/opencv/issues/15499)
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoCaptureProperties.HwAcceleration">
-            <summary>
-            (open-only) Hardware acceleration type (see VideoAccelerationType). 
-            Setting supported only via params parameter in cv::VideoCapture constructor / .open() method. 
-            Default value is backend-specific.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoCaptureProperties.HwDevice">
-            <summary>
-            (open-only) Hardware device index (select GPU if multiple available). Device enumeration is acceleration type specific.
             </summary>
         </member>
         <member name="F:OpenCvSharp.VideoCaptureProperties.OpenNI_OutputMode">
@@ -34896,41 +34403,6 @@
             Enter liveview mode.
             </summary>
         </member>
-        <member name="T:OpenCvSharp.VideoWriterPara">
-            <summary>
-            Parameters of VideoWriter for hardware acceleration
-            Please check the link below for current HW acceleration types support matrix
-            https://github.com/opencv/opencv/wiki/Video-IO-hardware-acceleration
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.VideoWriterPara.AccelerationType">
-            <summary>
-            Used as value in #CAP_PROP_HW_ACCELERATION and #VIDEOWRITER_PROP_HW_ACCELERATION
-            note In case of FFmpeg backend, it translated to enum AVHWDeviceType (https://github.com/FFmpeg/FFmpeg/blob/master/libavutil/hwcontext.h)
-            </summary>
-        </member>
-        <member name="P:OpenCvSharp.VideoWriterPara.HwDeviceIndex">
-            <summary>
-            Hardware device index (select GPU if multiple available). Device enumeration is acceleration type specific.
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.VideoWriterPara.#ctor">
-            <summary>
-            Constructor, parameter of VideoWriter for hardware acceleration
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.VideoWriterPara.#ctor(OpenCvSharp.VideoAccelerationType,System.Int32)">
-            <summary>
-            Constructor, parameter of VideoWriter for hardware acceleration
-            </summary>
-            <param name="videoAcceleration">Video Acceleration type</param>
-            <param name="deviceIndex">Hardware device index </param>
-        </member>
-        <member name="M:OpenCvSharp.VideoWriterPara.GetParameters">
-            <summary>
-            Get parameters of VideoWriter for hardware acceleration
-            </summary>
-        </member>
         <member name="T:OpenCvSharp.VideoWriterProperties">
             <summary>
             VideoWriter generic properties identifier.
@@ -34949,28 +34421,6 @@
         <member name="F:OpenCvSharp.VideoWriterProperties.NStripes">
             <summary>
             Number of stripes for parallel encoding. -1 for auto detection.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoWriterProperties.IsColor">
-            <summary>
-            If it is not zero, the encoder will expect and encode color frames, otherwise it will work with grayscale frames.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoWriterProperties.Depth">
-            <summary>
-            Defaults to CV_8U.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoWriterProperties.HwAcceleration">
-            <summary>
-            (open-only) Hardware acceleration type (see VideoAccelerationType). 
-            Setting supported only via params parameter in cv::VideoCapture constructor / .open() method. 
-            Default value is backend-specific.
-            </summary>
-        </member>
-        <member name="F:OpenCvSharp.VideoWriterProperties.HwDevice">
-            <summary>
-            (open-only) Hardware device index (select GPU if multiple available). Device enumeration is acceleration type specific.
             </summary>
         </member>
         <member name="T:OpenCvSharp.FourCC">
@@ -35083,29 +34533,6 @@
             if multiple are available: e.g. cv::CAP_DSHOW or cv::CAP_MSMF or cv::CAP_V4L.</param>
             <returns></returns>
         </member>
-        <member name="M:OpenCvSharp.VideoCapture.#ctor(System.Int32,OpenCvSharp.VideoCaptureAPIs,System.Int32[])">
-            <summary>
-            Opens a camera for video capturing with API Preference and parameters
-            </summary>
-            <param name="index">id of the video capturing device to open. To open default camera using default backend just pass 0.
-            (to backward compatibility usage of camera_id + domain_offset (CAP_*) is valid when apiPreference is CAP_ANY)</param>
-            <param name="apiPreference">preferred Capture API backends to use. Can be used to enforce a specific reader implementation
-            if multiple are available: e.g. cv::CAP_DSHOW or cv::CAP_MSMF or cv::CAP_V4L.</param>
-            <param name="prms">The `params` parameter allows to specify extra parameters encoded as pairs `(paramId_1, paramValue_1, paramId_2, paramValue_2, ...)`. 
-            See cv::VideoCaptureProperties</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.VideoCapture.#ctor(System.Int32,OpenCvSharp.VideoCaptureAPIs,OpenCvSharp.VideoCapturePara)">
-            <summary>
-            Opens a camera for video capturing with API Preference and parameters
-            </summary>
-            <param name="index">id of the video capturing device to open. To open default camera using default backend just pass 0.
-            (to backward compatibility usage of camera_id + domain_offset (CAP_*) is valid when apiPreference is CAP_ANY)</param>
-            <param name="apiPreference">preferred Capture API backends to use. Can be used to enforce a specific reader implementation
-            if multiple are available: e.g. cv::CAP_DSHOW or cv::CAP_MSMF or cv::CAP_V4L.</param>
-            <param name="prms">Parameters of VideoCature for hardware acceleration</param>
-            <returns></returns>
-        </member>
         <member name="M:OpenCvSharp.VideoCapture.FromCamera(System.Int32,OpenCvSharp.VideoCaptureAPIs)">
             <summary>
             Opens a camera for video capturing
@@ -35128,37 +34555,6 @@
             documentation of source stream to know the right URL.</param>
             <param name="apiPreference">apiPreference preferred Capture API backends to use. Can be used to enforce a specific reader
             implementation if multiple are available: e.g. cv::CAP_FFMPEG or cv::CAP_IMAGES or cv::CAP_DSHOW.</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.VideoCapture.#ctor(System.String,OpenCvSharp.VideoCaptureAPIs,System.Int32[])">
-            <summary>
-            Opens a video file or a capturing device or an IP video stream for video capturing with API Preference
-            </summary>
-            <param name="fileName">it can be:
-            - name of video file (eg. `video.avi`)
-            - or image sequence (eg. `img_%02d.jpg`, which will read samples like `img_00.jpg, img_01.jpg, img_02.jpg, ...`)
-            - or URL of video stream (eg. `protocol://host:port/script_name?script_params|auth`).
-            Note that each video stream or IP camera feed has its own URL scheme. Please refer to the
-            documentation of source stream to know the right URL.</param>
-            <param name="apiPreference">apiPreference preferred Capture API backends to use. Can be used to enforce a specific reader
-            implementation if multiple are available: e.g. cv::CAP_FFMPEG or cv::CAP_IMAGES or cv::CAP_DSHOW.</param>
-            <param name="prms">The `params` parameter allows to specify extra parameters encoded as pairs `(paramId_1, paramValue_1, paramId_2, paramValue_2, ...)`. 
-            See cv::VideoCaptureProperties</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.VideoCapture.#ctor(System.String,OpenCvSharp.VideoCaptureAPIs,OpenCvSharp.VideoCapturePara)">
-            <summary>
-            Opens a video file or a capturing device or an IP video stream for video capturing with API Preference
-            </summary>
-            <param name="fileName">it can be:
-            - name of video file (eg. `video.avi`)
-            - or image sequence (eg. `img_%02d.jpg`, which will read samples like `img_00.jpg, img_01.jpg, img_02.jpg, ...`)
-            - or URL of video stream (eg. `protocol://host:port/script_name?script_params|auth`).
-            Note that each video stream or IP camera feed has its own URL scheme. Please refer to the
-            documentation of source stream to know the right URL.</param>
-            <param name="apiPreference">apiPreference preferred Capture API backends to use. Can be used to enforce a specific reader
-            implementation if multiple are available: e.g. cv::CAP_FFMPEG or cv::CAP_IMAGES or cv::CAP_DSHOW.</param>
-            <param name="prms">Parameters of VideoCature for hardware acceleration</param>
             <returns></returns>
         </member>
         <member name="M:OpenCvSharp.VideoCapture.FromFile(System.String,OpenCvSharp.VideoCaptureAPIs)">
@@ -35828,60 +35224,6 @@
             <param name="isColor">If it is true, the encoder will expect and encode color frames, otherwise it will work with grayscale frames (the flag is currently supported on Windows only). </param>
             <returns></returns>
         </member>
-        <member name="M:OpenCvSharp.VideoWriter.#ctor(System.String,OpenCvSharp.FourCC,System.Double,OpenCvSharp.Size,System.Int32[])">
-            <summary>
-            Creates video writer structure. 
-            </summary>
-            <param name="fileName">Name of the output video file. </param>
-            <param name="fourcc">4-character code of codec used to compress the frames. For example, "PIM1" is MPEG-1 codec, "MJPG" is motion-jpeg codec etc. 
-            Under Win32 it is possible to pass null in order to choose compression method and additional compression parameters from dialog. </param>
-            <param name="fps">Frame rate of the created video stream. </param>
-            <param name="frameSize">Size of video frames. </param>
-            <param name="prms">The `params` parameter allows to specify extra encoder parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ... .)
-            see cv::VideoWriterProperties</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.VideoWriter.#ctor(System.String,OpenCvSharp.FourCC,System.Double,OpenCvSharp.Size,OpenCvSharp.VideoWriterPara)">
-            <summary>
-            Creates video writer structure. 
-            </summary>
-            <param name="fileName">Name of the output video file. </param>
-            <param name="fourcc">4-character code of codec used to compress the frames. For example, "PIM1" is MPEG-1 codec, "MJPG" is motion-jpeg codec etc. 
-            Under Win32 it is possible to pass null in order to choose compression method and additional compression parameters from dialog. </param>
-            <param name="fps">Frame rate of the created video stream. </param>
-            <param name="frameSize">Size of video frames. </param>
-            <param name="prms">Parameters of VideoWriter for hardware acceleration</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.VideoWriter.#ctor(System.String,OpenCvSharp.VideoCaptureAPIs,OpenCvSharp.FourCC,System.Double,OpenCvSharp.Size,System.Int32[])">
-            <summary>
-            Creates video writer structure. 
-            </summary>
-            <param name="fileName">Name of the output video file. </param>
-            <param name="apiPreference">allows to specify API backends to use. Can be used to enforce a specific reader implementation
-            if multiple are available: e.g. cv::CAP_FFMPEG or cv::CAP_GSTREAMER.</param>
-            <param name="fourcc">4-character code of codec used to compress the frames. For example, "PIM1" is MPEG-1 codec, "MJPG" is motion-jpeg codec etc. 
-            Under Win32 it is possible to pass null in order to choose compression method and additional compression parameters from dialog. </param>
-            <param name="fps">Frame rate of the created video stream. </param>
-            <param name="frameSize">Size of video frames. </param>
-            <param name="prms">The `params` parameter allows to specify extra encoder parameters encoded as pairs (paramId_1, paramValue_1, paramId_2, paramValue_2, ... .)
-            see cv::VideoWriterProperties</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.VideoWriter.#ctor(System.String,OpenCvSharp.VideoCaptureAPIs,OpenCvSharp.FourCC,System.Double,OpenCvSharp.Size,OpenCvSharp.VideoWriterPara)">
-            <summary>
-            Creates video writer structure. 
-            </summary>
-            <param name="fileName">Name of the output video file. </param>
-            <param name="apiPreference">allows to specify API backends to use. Can be used to enforce a specific reader implementation
-            if multiple are available: e.g. cv::CAP_FFMPEG or cv::CAP_GSTREAMER.</param>
-            <param name="fourcc">4-character code of codec used to compress the frames. For example, "PIM1" is MPEG-1 codec, "MJPG" is motion-jpeg codec etc. 
-            Under Win32 it is possible to pass null in order to choose compression method and additional compression parameters from dialog. </param>
-            <param name="fps">Frame rate of the created video stream. </param>
-            <param name="frameSize">Size of video frames. </param>
-            <param name="prms">Parameters of VideoWriter for hardware acceleration</param>
-            <returns></returns>
-        </member>
         <member name="M:OpenCvSharp.VideoWriter.#ctor(System.IntPtr)">
             <summary>
             Initializes from native pointer
@@ -36498,39 +35840,6 @@
             # features  
             </summary>
         </member>
-        <member name="T:OpenCvSharp.WeChatQRCode">
-            <summary>
-            WeChat QRCode includes two CNN-based models:
-            A object detection model and a super resolution model.
-            Object detection model is applied to detect QRCode with the bounding box.
-            super resolution model is applied to zoom in QRCode when it is small.
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.WeChatQRCode.Create(System.String,System.String,System.String,System.String)">
-            <summary>
-            Initialize the WeChatQRCode.
-            It includes two models, which are packaged with caffe format.
-            Therefore, there are prototxt and caffe models (In total, four paramenters).
-            </summary>
-            <param name="detectorPrototxtPath">prototxt file path for the detector</param>
-            <param name="detectorCaffeModelPath">caffe model file path for the detector</param>
-            <param name="superResolutionPrototxtPath">prototxt file path for the super resolution model</param>
-            <param name="superResolutionCaffeModelPath">caffe file path for the super resolution model</param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentException"></exception>
-        </member>
-        <member name="M:OpenCvSharp.WeChatQRCode.DetectAndDecode(OpenCvSharp.InputArray,OpenCvSharp.Mat[]@,System.String[]@)">
-            <summary>
-            Both detects and decodes QR code.
-            To simplify the usage, there is a only API: detectAndDecode
-            </summary>
-            <param name="inputImage">supports grayscale or color(BGR) image.</param>
-            <param name="bbox">optional output array of vertices of the found QR code quadrangle.Will be empty if not found.</param>
-            <param name="results">list of decoded string.</param>
-        </member>
-        <member name="M:OpenCvSharp.WeChatQRCode.DisposeManaged">
-            <inheritdoc />
-        </member>
         <member name="T:OpenCvSharp.XFeatures2D.BriefDescriptorExtractor">
             <summary>
             BRIEF Descriptor
@@ -36804,86 +36113,6 @@
             <param name="s3">The third strategy</param>
             <param name="s4">The forth strategy</param>
             <returns></returns>
-        </member>
-        <member name="T:OpenCvSharp.XImgProc.CvXImgProc.RL">
-            <summary>
-            run_length_morphology.hpp
-            </summary>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.Threshold(OpenCvSharp.InputArray,OpenCvSharp.OutputArray,System.Double,OpenCvSharp.ThresholdTypes)">
-            <summary>
-            Applies a fixed-level threshold to each array element.
-            </summary>
-            <param name="src">input array (single-channel).</param>
-            <param name="rlDest">resulting run length encoded image.</param>
-            <param name="thresh">threshold value.</param>
-            <param name="type">thresholding type (only cv::THRESH_BINARY and cv::THRESH_BINARY_INV are supported)</param>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.Dilate(OpenCvSharp.InputArray,OpenCvSharp.OutputArray,OpenCvSharp.InputArray,System.Nullable{OpenCvSharp.Point})">
-            <summary>
-            Dilates an run-length encoded binary image by using a specific structuring element.
-            </summary>
-            <param name="rlSrc">input image</param>
-            <param name="rlDest">result</param>
-            <param name="rlKernel">kernel</param>
-            <param name="anchor">position of the anchor within the element; default value (0, 0) is usually the element center.</param>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.Erode(OpenCvSharp.InputArray,OpenCvSharp.OutputArray,OpenCvSharp.InputArray,System.Boolean,System.Nullable{OpenCvSharp.Point})">
-            <summary>
-            Erodes an run-length encoded binary image by using a specific structuring element.
-            </summary>
-            <param name="rlSrc">input image</param>
-            <param name="rlDest">result</param>
-            <param name="rlKernel">kernel</param>
-            <param name="bBoundaryOn">indicates whether pixel outside the image boundary are assumed to be on
-            (True: works in the same way as the default of cv::erode, False: is a little faster)</param>
-            <param name="anchor">position of the anchor within the element; default value (0, 0)
-            is usually the element center.</param>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.GetStructuringElement(OpenCvSharp.MorphShapes,OpenCvSharp.Size)">
-            <summary>
-            Returns a run length encoded structuring element of the specified size and shape.
-            </summary>
-            <param name="shape">Element shape that can be one of cv::MorphShapes</param>
-            <param name="ksize">Size of the structuring element.</param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.Paint(OpenCvSharp.InputOutputArray,OpenCvSharp.InputArray,OpenCvSharp.Scalar)">
-            <summary>
-            Paint run length encoded binary image into an image.
-            </summary>
-            <param name="image">image to paint into (currently only single channel images).</param>
-            <param name="rlSrc">run length encoded image</param>
-            <param name="value">all foreground pixel of the binary image are set to this value</param>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.IsRLMorphologyPossible(OpenCvSharp.InputArray)">
-            <summary>
-            Check whether a custom made structuring element can be used with run length morphological operations.
-            (It must consist of a continuous array of single runs per row)
-            </summary>
-            <param name="rlStructuringElement"></param>
-            <returns></returns>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.CreateRLEImage(System.Collections.Generic.IEnumerable{OpenCvSharp.Point3i},OpenCvSharp.OutputArray,System.Nullable{OpenCvSharp.Size})">
-            <summary>
-            Creates a run-length encoded image from a vector of runs (column begin, column end, row)
-            </summary>
-            <param name="runs">vector of runs</param>
-            <param name="res">result</param>
-            <param name="size">image size (to be used if an "on" boundary should be used in erosion, using the default
-            means that the size is computed from the extension of the input)</param>
-        </member>
-        <member name="M:OpenCvSharp.XImgProc.CvXImgProc.RL.MorphologyEx(OpenCvSharp.InputArray,OpenCvSharp.OutputArray,OpenCvSharp.MorphTypes,OpenCvSharp.InputArray,System.Boolean,System.Nullable{OpenCvSharp.Point})">
-            <summary>
-            Applies a morphological operation to a run-length encoded binary image.
-            </summary>
-            <param name="rlSrc">input image</param>
-            <param name="rlDest">result</param>
-            <param name="op">all operations supported by cv::morphologyEx (except cv::MORPH_HITMISS)</param>
-            <param name="rlKernel">kernel</param>
-            <param name="bBoundaryOnForErosion">indicates whether pixel outside the image boundary are assumed
-            to be on for erosion operations (True: works in the same way as the default of cv::erode, False: is a little faster)</param>
-            <param name="anchor">position of the anchor within the element; default value (0, 0) is usually the element center.</param>
         </member>
         <member name="M:OpenCvSharp.XImgProc.CvXImgProc.NiblackThreshold(OpenCvSharp.InputArray,OpenCvSharp.OutputArray,System.Double,OpenCvSharp.ThresholdTypes,System.Int32,System.Double,OpenCvSharp.XImgProc.LocalBinarizationMethods,System.Double)">
             <summary>
@@ -38739,8 +37968,8 @@
             <summary>
             Apply Ridge detection filter on input image.
             </summary>
-            <param name="src">InputArray as supported by Sobel. img can be 1-Channel or 3-Channels.</param>
-            <param name="dst">OutputAray of structure as RidgeDetectionFilter::ddepth. Output image with ridges.</param>
+            <param name="img">InputArray as supported by Sobel. img can be 1-Channel or 3-Channels.</param>
+            <param name="out">OutputAray of structure as RidgeDetectionFilter::ddepth. Output image with ridges.</param>
         </member>
         <member name="T:OpenCvSharp.XPhoto.CvXPhoto">
             <summary>
