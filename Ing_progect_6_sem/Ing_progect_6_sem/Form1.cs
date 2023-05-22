@@ -13,6 +13,8 @@ namespace Ing_progect_6_sem
         private VideoCapture _capture;
         private Mat _image;
         private string _videoFile = @"C:\Users\ilyah\Desktop\test_video\video_1.mp4";
+        float lenght_marker = 0.105f;
+        Mat objPoints;
 
         bool is_video = false;
         bool is_cam = false;
@@ -31,6 +33,7 @@ namespace Ing_progect_6_sem
             Main_picture.Image = new Bitmap(640, 480);
             Load += Form1_Load;
             Closed += Form1_Closed;
+            objPoints = new Mat(4, 1, MatType.CV_32FC3, new float[,] { { -(float)lenght_marker / 2, -(float)lenght_marker / 2, 0 }, { (float)lenght_marker / 2, -(float)lenght_marker / 2, 0 }, { (float)lenght_marker / 2, (float)lenght_marker / 2, 0 }, { -(float)lenght_marker / 2, (float)lenght_marker / 2, 0 } });
         }
 
         private void Form1_Closed(object sender, EventArgs e)
@@ -43,6 +46,7 @@ namespace Ing_progect_6_sem
         {
             _image = new Mat();
             timer1.Start();
+
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -74,80 +78,125 @@ namespace Ing_progect_6_sem
             
             
         }
+        public Mat convert_array(Point2f[] fff)
+        {
+            float[,] point = new float[,] { { fff[0].X, fff[0].Y }, { fff[1].X, fff[1].Y }, { fff[2].X, fff[2].Y }, { fff[3].X, fff[3].Y } };
+            Mat point_pix = new Mat(4, 2, MatType.CV_32F, point);
+            return point_pix;
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             try
             {
-                if (is_video)
+                try
                 {
-                    _capture.Read(_image);
-                    if (_image.Empty())
+                    if (is_video)
+                    {
+                        _capture.Read(_image);
+                        if (_image.Empty())
+                        {
+                            Restart_but.Text = "Restart video";
+                            is_video = false;
+                        }
+                    }
+                    else if (is_cam && _capture.IsOpened())
+                    {
+                        _capture.Read(_image);
+                    }
+                }
+                catch
+                {
+                    if (is_video)
                     {
                         Restart_but.Text = "Restart video";
                         is_video = false;
                     }
+                    else if (is_cam)
+                    {
+                        Start_cam_but.Text = "Restart camera";
+                        is_cam = false;
+                    }
                 }
-                else if (is_cam && _capture.IsOpened())
+                if (is_picture || is_video || is_cam)
                 {
-                _capture.Read(_image);
+                    // Start working with image here => 
+
+                    Mat rr = _image.Resize(new Size(640, 480));
+                    Mat work_flow = new Mat();
+                    Cv2.Undistort(rr, work_flow, cam_matrix, dis_coef, cam_matrix);
+                    Mat out_flow = work_flow.Clone();
+
+                    // BGR to GRAY
+                    Cv2.CvtColor(work_flow, work_flow, ColorConversionCodes.BGR2GRAY);
+                    //Cv2.CvtColor(input_flow, work_flow, ColorConversionCodes.BGR2GRAY);
+
+                    // blur
+                    Cv2.GaussianBlur(work_flow, work_flow, new OpenCvSharp.Size(11, 11), 0);
+
+                    // Parameters foe Aruco
+                    Dictionary ff = CvAruco.GetPredefinedDictionary(PredefinedDictionaryName.Dict6X6_1000);
+                    var detectorParameters = DetectorParameters.Create();
+                    detectorParameters.CornerRefinementMethod = CornerRefineMethod.Subpix;
+                    detectorParameters.CornerRefinementWinSize = 9;
+
+                    // Detect Aruco and draw it
+                    CvAruco.DetectMarkers(work_flow, ff, out Point2f[][] corners_markers, out int[] id_markers, detectorParameters, out Point2f[][] ref_markers);
+                    //CvAruco.DrawDetectedMarkers(out_flow, corners_markers, id_markers, Scalar.Crimson);
+
+                    if (id_markers.Length > 0)
+                    {
+                        
+
+                        for (int i = 0; i < id_markers.Length; i++)
+                        {
+                            Mat rvec = new Mat();
+                            Mat tvec = new Mat();
+                            Cv2.SolvePnP(objPoints, convert_array(corners_markers[i]), cam_matrix, dis_coef, rvec, tvec);
+                            Cv2.DrawFrameAxes(out_flow, cam_matrix, dis_coef, rvec, tvec, 0.5f);
+                            debug_1.Text = "x: " + Math.Round(tvec.Get<double>(0), 3).ToString() + "; y: " + Math.Round(tvec.Get<double>(1), 3).ToString() + "; z: " + Math.Round(tvec.Get<double>(2), 3).ToString();
+                            Point2f[] pp = corners_markers[i];
+                            int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
+                            int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
+                            Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(0), 3).ToString(), new OpenCvSharp.Point(x_center, y_center), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
+                            Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(1), 3).ToString(), new OpenCvSharp.Point(x_center, y_center + 50), HersheyFonts.HersheySimplex, 0.5d, Scalar.Green);
+                            Cv2.PutText(out_flow, Math.Round(tvec.Get<double>(2), 3).ToString(), new OpenCvSharp.Point(x_center, y_center + 100), HersheyFonts.HersheySimplex, 0.5d, Scalar.Blue);
+                        }
+                        Mat rvecs = new Mat(), tvecs = new Mat(), objPointsss = new Mat();
+                        // Calculate postion and rotation marker 
+                        CvAruco.EstimatePoseSingleMarkers(corners_markers, 0.105f, cam_matrix, dis_coef, rvecs, tvecs, objPointsss);
+                        for (int i = 0; i < id_markers.Length; i++)
+                        {
+                            
+                            float rvecsVal1 = rvecs.At<float>(i, 0);
+                            float rvecsVal2 = rvecs.At<float>(i, 1);
+                            float rvecsVal3 = rvecs.At<float>(i, 2);
+
+                            double tvecsVal1 = Math.Round(tvecs.At<float>(i, 0), 3);
+                            double tvecsVal2 = Math.Round(tvecs.At<float>(i, 1), 3);
+                            double tvecsVal3 = Math.Round(tvecs.At<float>(i, 2), 3);
+                        debug_2.Text = "x: " + tvecsVal1.ToString() + "; y: " + tvecsVal2.ToString() + "; z: " + tvecsVal3.ToString();
+                        //Point2f[] pp = corners_markers[i];
+                        //int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
+                        //int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
+
+                        //Cv2.PutText(out_flow, tvecsVal1.ToString(), new OpenCvSharp.Point(x_center, y_center), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
+                        //Cv2.PutText(out_flow, tvecsVal2.ToString(), new OpenCvSharp.Point(x_center, y_center + 50), HersheyFonts.HersheySimplex, 0.5d, Scalar.Green);
+                        //Cv2.PutText(out_flow, tvecsVal3.ToString(), new OpenCvSharp.Point(x_center, y_center + 100), HersheyFonts.HersheySimplex, 0.5d, Scalar.Blue);
+
+                        //MessageBox.Show("");
+                    }
+                        
+                    }
+
+                    Main_picture.Image = BitmapConverter.ToBitmap(out_flow);
+                    Main_picture.Refresh();
                 }
+                else return;
             }
             catch
             {
-                if (is_video)
-                {
-                    Restart_but.Text = "Restart video";
-                    is_video = false;
-                }
-                else if (is_cam)
-                {
-                    Start_cam_but.Text = "Restart camera";
-                    is_cam = false;
-                }
+                return;
             }
-            if (is_picture || is_video || is_cam)
-            {
-                // Start working with image here => 
-
-                Mat work_flow = _image.Resize(new Size(640, 480));
-                Mat out_flow = work_flow.Clone();
-
-                // BGR to GRAY
-                Cv2.CvtColor(work_flow, work_flow, ColorConversionCodes.BGR2GRAY);
-                //Cv2.CvtColor(input_flow, work_flow, ColorConversionCodes.BGR2GRAY);
-
-                // blur
-                Cv2.GaussianBlur(work_flow, work_flow, new OpenCvSharp.Size(11, 11), 0);
-                
-                // Parameters foe Aruco
-                Dictionary ff = CvAruco.GetPredefinedDictionary(PredefinedDictionaryName.Dict6X6_1000);
-                var detectorParameters = DetectorParameters.Create();
-                detectorParameters.CornerRefinementMethod = CornerRefineMethod.Subpix;
-                detectorParameters.CornerRefinementWinSize = 9;
-
-                // Detect Aruco and draw it
-                CvAruco.DetectMarkers(work_flow, ff, out Point2f[][] corners_markers, out int[] id_markers, detectorParameters, out Point2f[][] ref_markers);
-                CvAruco.DrawDetectedMarkers(out_flow, corners_markers, id_markers, Scalar.Crimson);
-
-                if (id_markers.Length > 0)
-                {
-                    Mat rvecs = new Mat(), tvecs = new Mat(), objPoints = new Mat();
-                    // Calculate postion and rotation marker 
-                    CvAruco.EstimatePoseSingleMarkers(corners_markers, 0.10f, cam_matrix, dis_coef, rvecs, tvecs, objPoints);
-                    for (int i = 0; i < id_markers.Length; i++)
-                    {
-                        Point2f[] pp = corners_markers[i];
-                        int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
-                        int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
-                        //Cv2.PutText(out_flow, id_markers[i].ToString(), new OpenCvSharp.Point(x_center, y_center), HersheyFonts.HersheySimplex, 1d, Scalar.Crimson);
-                        debug.Text = rvecs.ToString();
-                    }
-                }
-
-                Main_picture.Image = BitmapConverter.ToBitmap(out_flow);
-                Main_picture.Refresh();
-            }
-            else return;
         }
 
         private void Restart_but_Click(object sender, EventArgs e)

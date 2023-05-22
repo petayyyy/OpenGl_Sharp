@@ -36,7 +36,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.Start_cam_but = new System.Windows.Forms.Button();
             this.Restart_but = new System.Windows.Forms.Button();
-            this.debug = new System.Windows.Forms.TextBox();
+            this.debug_1 = new System.Windows.Forms.TextBox();
+            this.debug_2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Main_picture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +45,7 @@
             // 
             this.Main_picture.BackColor = System.Drawing.Color.White;
             this.Main_picture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Main_picture.Location = new System.Drawing.Point(12, 36);
+            this.Main_picture.Location = new System.Drawing.Point(12, 63);
             this.Main_picture.Name = "Main_picture";
             this.Main_picture.Size = new System.Drawing.Size(1280, 960);
             this.Main_picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -54,7 +55,7 @@
             // Open_but
             // 
             this.Open_but.BackColor = System.Drawing.Color.White;
-            this.Open_but.Location = new System.Drawing.Point(1310, 36);
+            this.Open_but.Location = new System.Drawing.Point(1310, 63);
             this.Open_but.Name = "Open_but";
             this.Open_but.Size = new System.Drawing.Size(114, 92);
             this.Open_but.TabIndex = 1;
@@ -73,7 +74,7 @@
             // Start_cam_but
             // 
             this.Start_cam_but.BackColor = System.Drawing.Color.White;
-            this.Start_cam_but.Location = new System.Drawing.Point(1310, 134);
+            this.Start_cam_but.Location = new System.Drawing.Point(1310, 161);
             this.Start_cam_but.Name = "Start_cam_but";
             this.Start_cam_but.Size = new System.Drawing.Size(114, 92);
             this.Start_cam_but.TabIndex = 2;
@@ -84,7 +85,7 @@
             // Restart_but
             // 
             this.Restart_but.BackColor = System.Drawing.Color.White;
-            this.Restart_but.Location = new System.Drawing.Point(1310, 232);
+            this.Restart_but.Location = new System.Drawing.Point(1310, 259);
             this.Restart_but.Name = "Restart_but";
             this.Restart_but.Size = new System.Drawing.Size(114, 92);
             this.Restart_but.TabIndex = 3;
@@ -92,12 +93,19 @@
             this.Restart_but.UseVisualStyleBackColor = false;
             this.Restart_but.Click += new System.EventHandler(this.Restart_but_Click);
             // 
-            // debug
+            // debug_1
             // 
-            this.debug.Location = new System.Drawing.Point(12, 7);
-            this.debug.Name = "debug";
-            this.debug.Size = new System.Drawing.Size(1412, 22);
-            this.debug.TabIndex = 4;
+            this.debug_1.Location = new System.Drawing.Point(12, 7);
+            this.debug_1.Name = "debug_1";
+            this.debug_1.Size = new System.Drawing.Size(1412, 22);
+            this.debug_1.TabIndex = 4;
+            // 
+            // debug_2
+            // 
+            this.debug_2.Location = new System.Drawing.Point(12, 35);
+            this.debug_2.Name = "debug_2";
+            this.debug_2.Size = new System.Drawing.Size(1412, 22);
+            this.debug_2.TabIndex = 5;
             // 
             // Form1
             // 
@@ -105,7 +113,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1436, 1008);
-            this.Controls.Add(this.debug);
+            this.Controls.Add(this.debug_2);
+            this.Controls.Add(this.debug_1);
             this.Controls.Add(this.Restart_but);
             this.Controls.Add(this.Start_cam_but);
             this.Controls.Add(this.Open_but);
@@ -126,7 +135,8 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button Start_cam_but;
         private System.Windows.Forms.Button Restart_but;
-        private System.Windows.Forms.TextBox debug;
+        private System.Windows.Forms.TextBox debug_1;
+        private System.Windows.Forms.TextBox debug_2;
     }
 }
 
