@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "sdD+Ury6/6Z4Lfqen8rP/eJzghhQu8rbsiav3nH61Hpw6C+p46MMX61dypc+u5F+6mB1VA0NGdmIF+Iikoc10g==",
+  "dgSpecHash": "JKlcFGUZmISuyoUdR0i13IF5Yr9NZ/BSOJxFySChPiE58ize6O38uLh3n9uRb/YfHIPW8RHEhl9SA+O/41Fm4g==",
   "success": true,
   "projectFilePath": "A:\\Git\\OpenGl_Sharp\\Lab_3\\Lab_3\\test\\Lab_3.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ilyah\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\ilyah\\.nuget\\packages\\sharpgl\\3.1.1\\sharpgl.3.1.1.nupkg.sha512"
+    "C:\\Users\\ilyah\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -16,3 +16,13 @@ A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\obj\Debug\net6.0-windows\refint\Lab_3.dll
 A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\obj\Debug\net6.0-windows\Lab_3.pdb
 A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\obj\Debug\net6.0-windows\Lab_3.genruntimeconfig.cache
 A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\obj\Debug\net6.0-windows\ref\Lab_3.dll
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.dll
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\obj\Debug\net6.0-windows\Lab_3.csproj.CopyComplete
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.SceneGraph.dll
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.WinForms.dll
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.pdb
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.xml
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.SceneGraph.pdb
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.SceneGraph.xml
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.WinForms.pdb
+A:\Git\OpenGl_Sharp\Lab_3\Lab_3\test\bin\Debug\net6.0-windows\SharpGL.WinForms.xml

@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.Linq;
 using SharpGL;
 namespace test
 {
     public partial class Kholodilov_3 : Form
     {
+        OpenGL gl;
         Random random = new Random();
         bool is_start_work = false;
         bool is_noise_change = false;
@@ -18,9 +19,10 @@ namespace test
         int point_size = 5;
         int picture_size = 1100;
         int size_grid = 60;
-        private _3d_transform_point tr_3D = new _3d_transform_point();
         int[] start_mouse_pose;
 
+        float angle_x = 0f;
+        float angle_y = 0f;
         public Kholodilov_3()
         {
             InitializeComponent();
@@ -32,7 +34,6 @@ namespace test
             dataGridView1.Columns[2].Width = size_grid;
             dataGridView1.Width = size_grid * dataGridView1.ColumnCount + 20;
             Main_box.Image = new Bitmap(picture_size, picture_size);
-            tr_3D.half_picture_size = (picture_size - 300) / 2;
             angleY_bar.Enabled = false;
             angleX_bar.Enabled = false;
             Refr_but.Enabled = false;
@@ -40,39 +41,102 @@ namespace test
         }
         public void draw_main_img()
         {
-            // Draw axis
-            Bitmap bmp = new Bitmap(picture_size, picture_size);
-            Graphics g = Graphics.FromImage(bmp);
-            g.TranslateTransform(picture_size / 2, picture_size / 2);
+            gl = null;
+            draw_points_3d();
+        }
+        public void draw_points_3d()
+        { /*
+            if (vectors.Length == 0) return;
+            gl.Clear(SharpGL.OpenGL.GL_COLOR_BUFFER_BIT | SharpGL.OpenGL.GL_DEPTH_BUFFER_BIT);
+            gl.MatrixMode(SharpGL.OpenGL.GL_PROJECTION);
+            gl.LoadIdentity();
+            gl.Perspective(60.0f, OpenGL.Width / (double)OpenGL.Height, 0.01, 100.0);
 
-            int[] XAxe0Point = tr_3D.Transform_point(new float[,]   { { 0f },    { 0f },   { 0f } }); // X: start
-            int[] XAxeEndPoint = tr_3D.Transform_point(new float[,] { { 1f },    { 0f },   { 0f } }); // X: end
-            int[] YAxe0Point = tr_3D.Transform_point(new float[,]   { { 0f },    { 0f },   { 0f } }); // Y: start
-            int[] YAxeEndPoint = tr_3D.Transform_point(new float[,] { { 0f},     { 0f},    { -1f} });  // Y: end
-            int[] ZAxe0Point = tr_3D.Transform_point(new float[,]   { { 0f },    { 0f },   { 0f } }); // Z: start
-            int[] ZAxeEndPoint = tr_3D.Transform_point(new float[,] { { 0f },    { -1f }, { 0f } });  // Z: end
 
-            g.DrawLine(new Pen(Color.Red, axis_line_size), XAxe0Point[0], XAxe0Point[1], XAxeEndPoint[0], XAxeEndPoint[1]);
-            g.DrawLine(new Pen(Color.Green, axis_line_size), YAxe0Point[0], YAxe0Point[1], YAxeEndPoint[0], YAxeEndPoint[1]);
-            g.DrawLine(new Pen(Color.Blue, axis_line_size), ZAxe0Point[0], ZAxe0Point[1], ZAxeEndPoint[0], ZAxeEndPoint[1]);
+            double CamX = POINTS_CAM_RADIUS * Math.Sin(POINTS_MERIDIAN_ANGLE) * Math.Cos(POINTS_EQUATOR_ANGLE);
+            double CamY = POINTS_CAM_RADIUS * Math.Cos(POINTS_MERIDIAN_ANGLE);
+            double CamZ = POINTS_CAM_RADIUS * Math.Sin(POINTS_MERIDIAN_ANGLE) * Math.Sin(POINTS_EQUATOR_ANGLE);
 
-            g.DrawString("X", new Font("Aria", 20, FontStyle.Bold), Brushes.Red, XAxeEndPoint[0], XAxeEndPoint[1]);
-            g.DrawString("Y", new Font("Aria", 20, FontStyle.Bold), Brushes.Green, YAxeEndPoint[0], YAxeEndPoint[1]);
-            g.DrawString("Z", new Font("Aria", 20, FontStyle.Bold), Brushes.Blue, ZAxeEndPoint[0], ZAxeEndPoint[1]);
+            gl.LookAt(CamX, CamY, CamZ, 0, 0, 0, 0, 1, 0);
 
-            //Draw points
-            if (is_start_work)
-            {
-                for (int i = 0; i < count_point; i++)
-                {
-                    int[] Projected = tr_3D.Transform_point(new float[,] { { generated_point[i, 0] }, { -generated_point[i, 2] }, { -generated_point[i, 1] } });
-                    // Calculate color for points
-                    Color col = Color.FromArgb(tr_3D.Calculate_color(new float[,] { { generated_point[i, 0] }, { -generated_point[i, 2] }, { -generated_point[i, 1] } }), 0, 0, 0);
-                    g.FillEllipse(new SolidBrush(col), Projected[0] - point_size, Projected[1] - point_size, point_size * 2, point_size * 2);
-                    if (checkBox_n.Checked) g.DrawString((i+1).ToString(), new Font("Aria", 20, FontStyle.Bold), Brushes.Pink, Projected[0], Projected[1]);
-                }
-            }
-            Main_box.Image = bmp;
+            gl.MatrixMode(SharpGL.OpenGL.GL_MODELVIEW);
+
+            gl.Begin(SharpGL.OpenGL.GL_POINTS);
+
+            int Gap = 1;
+
+            int GapCount = vectors.Length;
+
+            for (int i = 0; i < GapCount; i++)
+                for (int j = 0; j < Gap; j++)
+                    if (GAP_NUMS.Contains(j + 1))
+                    {
+                        gl.Color((byte)255, (byte)255, (byte)10);
+                        //gl.Color(ColorFromRGB());
+                        gl.Vertex(vectors[i * Gap + j].X, vectors[i * Gap + j].Y, vectors[i * Gap + j].Z);
+                    }
+
+            gl.End();
+
+
+            gl.Begin(SharpGL.OpenGL.GL_LINES);
+
+            gl.Color(1.0f, 0.0f, 0.0f);
+            gl.Vertex(0.0f, 0.0f, 0.0f);
+            gl.Vertex(1.0f, 0.0f, 0.0f);
+
+            gl.Color(0.0f, 1.0f, 0.0f);
+            gl.Vertex(0.0f, 0.0f, 0.0f);
+            gl.Vertex(0.0f, 1.0f, 0.0f);
+
+            gl.Color(0.0f, 0.0f, 1.0f);
+            gl.Vertex(0.0f, 0.0f, 0.0f);
+            gl.Vertex(0.0f, 0.0f, 1.0f);
+
+            gl.End();
+
+            // Описывающий куб
+            gl.Begin(SharpGL.OpenGL.GL_LINES);
+            gl.Color(1.0f, 1.0f, 1.0f);
+
+            gl.Vertex(-1.0f, -1.0f, -1.0f);
+            gl.Vertex(1.0f, -1.0f, -1.0f);
+
+            gl.Vertex(-1.0f, -1.0f, -1.0f);
+            gl.Vertex(-1.0f, 1.0f, -1.0f);
+
+            gl.Vertex(-1.0f, -1.0f, -1.0f);
+            gl.Vertex(-1.0f, -1.0f, 1.0f);
+
+            gl.Vertex(1.0f, 1.0f, 1.0f);
+            gl.Vertex(-1.0f, 1.0f, 1.0f);
+
+            gl.Vertex(1.0f, 1.0f, 1.0f);
+            gl.Vertex(1.0f, -1.0f, 1.0f);
+
+            gl.Vertex(1.0f, 1.0f, 1.0f);
+            gl.Vertex(1.0f, 1.0f, -1.0f);
+
+            gl.Vertex(-1.0f, 1.0f, -1.0f);
+            gl.Vertex(1.0f, 1.0f, -1.0f);
+
+            gl.Vertex(-1.0f, 1.0f, -1.0f);
+            gl.Vertex(-1.0f, 1.0f, 1.0f);
+
+            gl.Vertex(1.0f, -1.0f, 1.0f);
+            gl.Vertex(-1.0f, -1.0f, 1.0f);
+
+            gl.Vertex(1.0f, -1.0f, -1.0f);
+            gl.Vertex(1.0f, -1.0f, 1.0f);
+
+            gl.Vertex(1.0f, 1.0f, -1.0f);
+            gl.Vertex(1.0f, -1.0f, -1.0f);
+
+            gl.Vertex(-1.0f, 1.0f, 1.0f);
+            gl.Vertex(-1.0f, -1.0f, 1.0f);
+
+            gl.End();
+            */
         }
         public void view_datagreed()
         {
@@ -133,6 +197,33 @@ namespace test
             view_datagreed();
             draw_main_img();
         }
+        private void openGLControl1_OpenGLDraw(object sender, RenderEventArgs args)
+        {
+            // Создаем экземпляр
+            //OpenGL gl = this.openGLControl1.OpenGL;
+
+            //// Очистка экрана и буфера глубин
+            //gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
+
+            //// Сбрасываем модельно-видовую матрицу
+            //gl.LoadIdentity();
+
+            //// Двигаем перо вглубь экрана
+            //gl.Translate(0.0f, 0.0f, -5.0f);
+
+            //gl.Begin(OpenGL.GL_TRIANGLES);
+
+            //// Указываем цвет вершин
+            //gl.Color(1f, 1f, 1f);
+
+            //gl.Vertex(-1f, -1f);
+            //gl.Vertex(0f, 1f);
+            //gl.Vertex(1f, -1f);
+
+            //// Завершаем работу
+            //gl.End();
+
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             draw_main_img();
@@ -174,8 +265,8 @@ namespace test
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
             is_start_work = false;
-            tr_3D.angle_y = 0;
-            tr_3D.angle_x = 0;
+            angle_y = 0;
+            angle_x = 0;
             angleY_bar.Enabled = false;
             angleX_bar.Enabled = false;
             generate_var_but.Enabled = true;
@@ -227,11 +318,11 @@ namespace test
         {
             if (is_rotate_change)
             {
-                tr_3D.angle_y -= (float)((((double)(start_mouse_pose[0] - e.X)) * (Math.PI / 6)) / tr_3D.half_picture_size);
-                tr_3D.angle_x -= (float)((((double)(start_mouse_pose[1] - e.Y)) * (Math.PI / 6)) / tr_3D.half_picture_size);
+                angle_y -= (float)((((double)(start_mouse_pose[0] - e.X)) * (Math.PI / 3)) / picture_size);
+                angle_x -= (float)((((double)(start_mouse_pose[1] - e.Y)) * (Math.PI / 3)) / picture_size);
                 start_mouse_pose = new int[] { e.X, e.Y };
-                angleY_bar.Value = (int)((180f / (float)Math.PI) * tr_3D.angle_x);
-                angleX_bar.Value = (int)((180f / (float)Math.PI) * tr_3D.angle_y);
+                angleY_bar.Value = (int)((180f / (float)Math.PI) * angle_x);
+                angleX_bar.Value = (int)((180f / (float)Math.PI) * angle_y);
             }
         }
         private void Main_box_MouseUp(object sender, MouseEventArgs e)
@@ -244,12 +335,12 @@ namespace test
         }
         private void angleY_bar_ValueChanged(object sender, EventArgs e)
         {
-            tr_3D.angle_x = (float)(((float)Math.PI / 180f) * angleY_bar.Value);
+            angle_x = (float)(((float)Math.PI / 180f) * angleY_bar.Value);
             is_rotate_scroll_change = true;
         }
         private void angleX_bar_ValueChanged(object sender, EventArgs e)
         {
-            tr_3D.angle_y = (float)(((float)Math.PI / 180f) * angleX_bar.Value);
+            angle_y = (float)(((float)Math.PI / 180f) * angleX_bar.Value);
             is_rotate_scroll_change = true;
         }
         private void Save_but_Click(object sender, EventArgs e)
@@ -319,5 +410,6 @@ namespace test
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

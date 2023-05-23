@@ -7,8 +7,39 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "Lab_3/1.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "SharpGL": "2.3.0.1",
+          "SharpGL.SceneGraph": "2.3.0.1",
+          "SharpGL.WinForms": "2.3.0.1"
+        },
         "runtime": {
           "Lab_3.dll": {}
+        }
+      },
+      "Microsoft.CSharp/4.7.0": {},
+      "SharpGL/2.3.0.1": {
+        "runtime": {
+          "SharpGL.dll": {
+            "assemblyVersion": "2.3.0.1",
+            "fileVersion": "2.3.0.1"
+          }
+        }
+      },
+      "SharpGL.SceneGraph/2.3.0.1": {
+        "runtime": {
+          "SharpGL.SceneGraph.dll": {
+            "assemblyVersion": "2.3.0.1",
+            "fileVersion": "2.3.0.1"
+          }
+        }
+      },
+      "SharpGL.WinForms/2.3.0.1": {
+        "runtime": {
+          "SharpGL.WinForms.dll": {
+            "assemblyVersion": "2.3.0.1",
+            "fileVersion": "2.3.0.1"
+          }
         }
       }
     }
@@ -16,6 +47,28 @@
   "libraries": {
     "Lab_3/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
+    },
+    "SharpGL/2.3.0.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharpGL.SceneGraph/2.3.0.1": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SharpGL.WinForms/2.3.0.1": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
