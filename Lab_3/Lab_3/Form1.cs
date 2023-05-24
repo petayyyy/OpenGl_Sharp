@@ -610,8 +610,10 @@ namespace Lab_3
                 if (res == DialogResult.OK)
                 {
                     listBox1.SelectedIndex = 0;
+                    Draw3DGraph();
                     Mat PointsScreenshot = SaveScreen(OpenGL);
                     listBox1.SelectedIndex = 1;
+                    Draw3DGraph();
                     Mat VoxelsScreenshot = SaveScreen(OpenGL);
 
                     Mat FinalScreenshot = new Mat();
