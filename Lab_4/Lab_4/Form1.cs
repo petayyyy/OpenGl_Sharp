@@ -372,6 +372,7 @@ namespace Lab_4
             int CurrentNode = NodesComboBox.SelectedIndex; // Какой узел отобразить
             int TimeCount = NODES[CurrentNode].TimeStamps.Length; // Сколько в узле всего записей по времени
             sliding.Maximum = TimeCount - TimeWidth;
+            debug.Text = "Max sl is:" + sliding.Maximum.ToString() + " valur sl is:" + sliding.Value;
             //SlidingWindowTrackBar.Maximum = TimeCount - TimeWidth; // До куда можно двигать синее скользящее окно
             //int TimeStart = SlidingWindowTrackBar.Value; // Время начала интерполяции
             int TimeStart = sliding.Value; // Время начала интерполяции
@@ -392,9 +393,9 @@ namespace Lab_4
             g.DrawLine(new Pen(Color.Black), Mgn, Mgn, Mgn, Bsize - Mgn);
             g.DrawLine(new Pen(Color.Black), Mgn, Bsize - Mgn, Bsize - Mgn, Bsize - Mgn);
 
-            g.DrawString("Время", new Font("Calibri", 10, FontStyle.Bold), Brushes.Black, Bsize - Mgn * 2, Bsize - Mgn);
+            g.DrawString("Time", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, Bsize - Mgn * 2, Bsize - Mgn);
             g.RotateTransform(90);
-            g.DrawString("Поток между узлами", new Font("Calibri", 10, FontStyle.Bold), Brushes.Black, Mgn, -Mgn);
+            g.DrawString("Flow between nodes", new Font("Arial", 10, FontStyle.Bold), Brushes.Black, Mgn, -Mgn);
             g.RotateTransform(-90);
 
             // Данные с потока между узлами
@@ -414,7 +415,7 @@ namespace Lab_4
                         int TimeToX = (int)ConvertRange(0, TimeCount, Mgn, Bsize - Mgn, NewTime);
                         int TimeToY = (int)ConvertRange(0, 255, Bsize - Mgn, Mgn, NewValue);
 
-                        g.FillRectangle(Brushes.Yellow, TimeToX, TimeToY - PointRadius, PointRadius, PointRadius);
+                        g.FillRectangle(Brushes.Red, TimeToX, TimeToY - PointRadius, PointRadius, PointRadius);
                     }
                 }
 
@@ -423,13 +424,13 @@ namespace Lab_4
                 // Визуализация на битмапе
                 int x = (int)ConvertRange(0, TimeCount, Mgn, Bsize - Mgn, time);
                 int y = (int)ConvertRange(0, 255, Bsize - Mgn, Mgn, NODES[CurrentNode].Values[time]);
-                g.FillRectangle(Brushes.Yellow, x, y - PointRadius, PointRadius, PointRadius);
+                g.FillRectangle(Brushes.Red, x, y - PointRadius, PointRadius, PointRadius);
             }
 
             // Скользящее окно
             int WinX = (int)ConvertRange(0, TimeCount, Mgn, Bsize - Mgn, TimeStart);
             int WinWidth = (int)ConvertRange(0, TimeCount, 0, Bsize, TimeWidth);
-            g.FillRectangle(new SolidBrush(Color.FromArgb(128, Color.Purple)), WinX, 0, WinWidth - PointRadius, Bsize);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.Gray)), WinX, 0, WinWidth - PointRadius, Bsize);
 
             g.Dispose();
             b.Save(TOP_PATH);
@@ -628,7 +629,7 @@ namespace Lab_4
             g.DrawLine(new Pen(Color.Black), Mgn, Mgn, Mgn, Bsize - Mgn); // Y
             g.DrawLine(new Pen(Color.Black), Mgn, Bsize - Mgn, Bsize - Mgn, Bsize - Mgn); // X
 
-            Font font = new Font("Calibri", 10, FontStyle.Bold);
+            Font font = new Font("Arial", 10, FontStyle.Bold);
             g.DrawString("X", font, Brushes.Black, Bsize - Mgn / 2, Bsize - Mgn);
             g.DrawString("Y", font, Brushes.Black, Mgn / 2, Mgn / 2);
 
@@ -853,81 +854,92 @@ namespace Lab_4
         // Задание 2
         private void LoadCANFileButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog
+            try
             {
-                RestoreDirectory = true,
-                Filter = "дампы | *.dmp"
-            };
+                DialogResult res = openFileDialog1.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    byte[] Data = File.ReadAllBytes(openFileDialog1.FileName);
+                    PACKAGES = new Package[0];
+                    NODES = new Node[0];
 
-            if (dialog.ShowDialog() == DialogResult.OK)
+                    // Определение уникальных узлов
+                    HashSet<string> UniqueNodes = new HashSet<string>();
+
+                    // Заполняем пакеты 
+                    for (int i = 0; i < Data.Length; i += 19)
+                    {
+                        byte[] TimeBytes = { Data[i], Data[i + 1] };
+                        int Seconds = BitConverter.ToInt16(TimeBytes, 0);
+
+                        string Time = TimeSpan.FromSeconds(Seconds).ToString();
+                        byte Target = Data[i + 6];
+                        byte Source = Data[i + 7];
+                        byte Value = Data[i + 9];
+
+                        UniqueNodes.Add(Source.ToString() + " -> " + Target.ToString());
+                        PACKAGES = PACKAGES.Add(new Package(Time, Source, Target, Value));
+                    }
+
+                    // Заполняем узлы
+                    foreach (var n in UniqueNodes)
+                    {
+                        Node node = new Node(n);
+                        foreach (var p in PACKAGES)
+                            if (node.BelongsToNode(p))
+                                node.AddValue(p.Time, p.Value);
+
+                        NODES = NODES.Add(node);
+                    }
+
+                    NodesComboBox.Items.AddRange(UniqueNodes.ToArray());
+                    NodesComboBox.SelectedIndex = 0;
+
+                    XComboBox.Items.AddRange(UniqueNodes.ToArray());
+                    XComboBox.SelectedIndex = 0;
+
+                    YComboBox.Items.AddRange(UniqueNodes.ToArray());
+                    YComboBox.SelectedIndex = 1;
+
+                    ZComboBox.Items.AddRange(UniqueNodes.ToArray());
+                    ZComboBox.SelectedIndex = 2;
+
+                    TimeFromComboBox.Items.AddRange(NODES[0].TimeStamps);
+                    TimeFromComboBox.SelectedIndex = 0;
+
+                    TimeToComboBox.Items.AddRange(NODES[0].TimeStamps);
+                    TimeToComboBox.SelectedIndex = NODES[0].TimeStamps.Length - 1;
+
+                    FillDataGrid(UniqueNodes);
+                    StatAnalys();
+                    DrawHistograms();
+                    ScatterPlot();
+                    DrawEverything();
+                }
+                else MessageBox.Show("Error, you don't take any file.");
+            }
+            catch (Exception ex)
             {
-                byte[] Data = File.ReadAllBytes(dialog.FileName);
-                PACKAGES = new Package[0];
-                NODES = new Node[0];
-
-                // Определение уникальных узлов
-                HashSet<string> UniqueNodes = new HashSet<string>();
-
-                // Заполняем пакеты 
-                for (int i = 0; i < Data.Length; i += 19)
-                {
-                    byte[] TimeBytes = { Data[i], Data[i + 1] };
-                    int Seconds = BitConverter.ToInt16(TimeBytes, 0);
-
-                    string Time = TimeSpan.FromSeconds(Seconds).ToString();
-                    byte Target = Data[i + 6];
-                    byte Source = Data[i + 7];
-                    byte Value = Data[i + 9];
-
-                    UniqueNodes.Add(Source.ToString() + " -> " + Target.ToString());
-                    PACKAGES = PACKAGES.Add(new Package(Time, Source, Target, Value));
-                }
-
-                // Заполняем узлы
-                foreach (var n in UniqueNodes)
-                {
-                    Node node = new Node(n);
-                    foreach (var p in PACKAGES)
-                        if (node.BelongsToNode(p))
-                            node.AddValue(p.Time, p.Value);
-
-                    NODES = NODES.Add(node);
-                }
-
-                NodesComboBox.Items.AddRange(UniqueNodes.ToArray());
-                NodesComboBox.SelectedIndex = 0;
-
-                XComboBox.Items.AddRange(UniqueNodes.ToArray());
-                XComboBox.SelectedIndex = 0;
-
-                YComboBox.Items.AddRange(UniqueNodes.ToArray());
-                YComboBox.SelectedIndex = 1;
-
-                ZComboBox.Items.AddRange(UniqueNodes.ToArray());
-                ZComboBox.SelectedIndex = 2;
-
-                TimeFromComboBox.Items.AddRange(NODES[0].TimeStamps);
-                TimeFromComboBox.SelectedIndex = 0;
-
-                TimeToComboBox.Items.AddRange(NODES[0].TimeStamps);
-                TimeToComboBox.SelectedIndex = NODES[0].TimeStamps.Length - 1;
-
-                FillDataGrid(UniqueNodes);
-                StatAnalys();
-                DrawHistograms();
-                ScatterPlot();
-                DrawEverything();
+                MessageBox.Show("Error, your file have incorrect type. You must take .csv.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void GetScreenshotButton_Click(object sender, EventArgs e)
         {
-            Dialog.SaveFile(DataType.Images, SaveImage);
-
-            void SaveImage(string filename)
+            if (opengl1 == null) return;
+            DialogResult res = saveFileDialog1.ShowDialog();
+            try
             {
-                Mat Screenshot = GetScreenshot(DataControl);
-                Screenshot.SaveImage(filename);
+                if (res == DialogResult.OK)
+                {
+                    Mat Screenshot = GetScreenshot(DataControl);
+                    Screenshot.SaveImage(saveFileDialog1.FileName);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Something wrong with your picture");
             }
         }
 
@@ -983,14 +995,6 @@ namespace Lab_4
             DrawEverything();
         }
 
-        private async void TrackBars_Scroll(object sender, EventArgs e)
-        {
-            if (PACKAGES == null || NODES == null) return;
-
-            await StatAnalys();
-            DrawEverything();
-        }
-
         private void CheckBoxes_CheckChanged(object sender, EventArgs e) => DrawEverything();
 
         private async void ComboBoxes_SelectedIndexChanged(object sender, EventArgs e)
@@ -1004,7 +1008,7 @@ namespace Lab_4
             if (TimeToComboBox.SelectedIndex == -1) return;
             if (TimeFromComboBox.SelectedIndex == TimeToComboBox.SelectedIndex) return; 
 
-            await StatAnalys();
+            StatAnalys();
             await DrawHistograms();
             await ScatterPlot();
             //AveragePlot();
@@ -1029,6 +1033,12 @@ namespace Lab_4
                 angleX = (float)(((float)Math.PI / 180f) * angleX_bar.Value);
                 DrawEverything();
             }
+        }
+
+        private void sliding_ValueChanged(object sender, EventArgs e)
+        {
+            StatAnalys();
+            DrawEverything();
         }
     }
 

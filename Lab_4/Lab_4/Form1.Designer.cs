@@ -53,13 +53,14 @@
             this.HideBackPlaneCheckBox = new System.Windows.Forms.CheckBox();
             this.DataControl = new SharpGL.OpenGLControl();
             this.label3 = new System.Windows.Forms.Label();
-            this.SlidingWindowTrackBar = new System.Windows.Forms.TrackBar();
             this.angleY_bar = new System.Windows.Forms.VScrollBar();
             this.angleX_bar = new System.Windows.Forms.HScrollBar();
             this.sliding = new System.Windows.Forms.HScrollBar();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.debug = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.CANDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SlidingWindowTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // ZComboBox
@@ -339,24 +340,12 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(1073, 701);
+            this.label3.Location = new System.Drawing.Point(1074, 765);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 16);
             this.label3.TabIndex = 42;
             this.label3.Text = "Sliding window";
-            // 
-            // SlidingWindowTrackBar
-            // 
-            this.SlidingWindowTrackBar.BackColor = System.Drawing.Color.White;
-            this.SlidingWindowTrackBar.Location = new System.Drawing.Point(1076, 721);
-            this.SlidingWindowTrackBar.Margin = new System.Windows.Forms.Padding(4);
-            this.SlidingWindowTrackBar.Maximum = 100;
-            this.SlidingWindowTrackBar.Name = "SlidingWindowTrackBar";
-            this.SlidingWindowTrackBar.Size = new System.Drawing.Size(247, 56);
-            this.SlidingWindowTrackBar.TabIndex = 41;
-            this.SlidingWindowTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.SlidingWindowTrackBar.Scroll += new System.EventHandler(this.TrackBars_Scroll);
             // 
             // angleY_bar
             // 
@@ -384,6 +373,19 @@
             this.sliding.Name = "sliding";
             this.sliding.Size = new System.Drawing.Size(239, 21);
             this.sliding.TabIndex = 58;
+            this.sliding.ValueChanged += new System.EventHandler(this.sliding_ValueChanged);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "DAMP | *.dmp";
+            // 
+            // debug
+            // 
+            this.debug.Location = new System.Drawing.Point(1044, 1036);
+            this.debug.Name = "debug";
+            this.debug.Size = new System.Drawing.Size(784, 22);
+            this.debug.TabIndex = 59;
             // 
             // Form1
             // 
@@ -391,6 +393,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1841, 1061);
+            this.Controls.Add(this.debug);
             this.Controls.Add(this.sliding);
             this.Controls.Add(this.angleX_bar);
             this.Controls.Add(this.angleY_bar);
@@ -417,14 +420,12 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.Open_but);
             this.Controls.Add(this.DataControl);
-            this.Controls.Add(this.SlidingWindowTrackBar);
             this.Controls.Add(this.CANDataGrid);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Lab_4";
             ((System.ComponentModel.ISupportInitialize)(this.CANDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SlidingWindowTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,11 +455,13 @@
         private System.Windows.Forms.DataGridView CANDataGrid;
         private SharpGL.OpenGLControl DataControl;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TrackBar SlidingWindowTrackBar;
         private System.Windows.Forms.CheckBox HideLeftPlaneCheckBox;
         private System.Windows.Forms.CheckBox HideBackPlaneCheckBox;
         private System.Windows.Forms.VScrollBar angleY_bar;
         private System.Windows.Forms.HScrollBar angleX_bar;
         private System.Windows.Forms.HScrollBar sliding;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TextBox debug;
     }
 }
