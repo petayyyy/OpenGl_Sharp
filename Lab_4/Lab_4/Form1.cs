@@ -1039,6 +1039,12 @@ namespace Lab_4
             StatAnalys();
             DrawEverything();
         }
+
+        private void HideLeftPlaneCheckBox_Click(object sender, EventArgs e)
+        {
+            if (HideTopPlaneCheckBox.Checked) StatAnalys();
+            DrawEverything();
+        }
     }
 
     public struct Package
