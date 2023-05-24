@@ -151,7 +151,7 @@ namespace Ing_progect_6_sem
                             Mat rvec = new Mat();
                             Mat tvec = new Mat();
                             Cv2.SolvePnP(objPoints, convert_array(corners_markers[i]), cam_matrix, dis_coef, rvec, tvec);
-                            //Cv2.DrawFrameAxes(out_flow, cam_matrix, dis_coef, rvec, tvec, 0.3f);
+                            Cv2.DrawFrameAxes(out_flow, cam_matrix, dis_coef, rvec, tvec, 0.3f);
                             debug_1.Text = "x: " + Math.Round(tvec.Get<double>(0), 3).ToString() + "; y: " + Math.Round(tvec.Get<double>(1), 3).ToString() + "; z: " + Math.Round(tvec.Get<double>(2), 3).ToString();
                             Point2f[] pp = corners_markers[i];
                             int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
