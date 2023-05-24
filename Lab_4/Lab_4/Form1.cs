@@ -865,6 +865,7 @@ namespace Lab_4
                     // Определение уникальных узлов
                     HashSet<string> UniqueNodes = new HashSet<string>();
 
+                    // time (4) + prefix (1) + format + dest + source + DLC + body (8) + delim (2) = 19 bytes length
                     // Заполняем пакеты 
                     for (int i = 0; i < Data.Length; i += 19)
                     {
