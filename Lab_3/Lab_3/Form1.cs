@@ -96,8 +96,6 @@ namespace Lab_3
             picture_but.Enabled = true;
             view_datagreed();
             CalculateHistogramDensity();
-            //CalculateVoxelDensity();
-            CalculateDensityMiddle();
             Draw3DGraph();
         }
         public float check_point(float x)
@@ -169,8 +167,6 @@ namespace Lab_3
                 for (int j = 0; j < 3; j++) generated_point[i - 1, j] = float.Parse(vs2[j]);
             }
             CalculateHistogramDensity();
-            //CalculateVoxelDensity();
-            CalculateDensityMiddle();
             Draw3DGraph();
         }
         private void Download_button_Click(object sender, EventArgs e)
@@ -446,44 +442,6 @@ namespace Lab_3
                 }
             }
             gl.End();
-        }
-        private void CalculateDensityMiddle()
-        {
-            //int Max = 0;
-
-            //for(int i = 0; i < 10; i++)
-            //{
-            //    for (int k = 0; k < 10; k++)
-            //    {
-            //        for (int m = 0; m < 10; m++)
-            //        {
-            //            if (density_3d[i, k, m] > Max)
-            //                Max = density_3d[i, k, m];
-            //        }
-            //    }
-            //}
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    for (int k = 0; k < 10; k++)
-            //    {
-            //        for (int m = 0; m < 10; m++)
-            //        {
-            //            density_3d[i, k, m] = (int)(ConvertScale(0, Max, 0, count_point, density_3d[i, k, m]));
-            //        }
-            //    }
-            //}
-
-            //for (int x = 0; x < 10; x++)
-            //{
-            //    for (int y = 0; y < 10; y++)
-            //    {
-            //        for (int z = 0; z < 10; z++)
-            //        {
-            //            density_3d[x, y, z] = (int)(ConvertScale(0, Max, 0, count_point, density_3d[i, k, m]));
-            //        }
-            //    }
-            //}
         }
         private void DrawFace()
         {

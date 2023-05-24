@@ -142,7 +142,7 @@ namespace Ing_progect_6_sem
 
                     // Detect Aruco and draw it
                     CvAruco.DetectMarkers(work_flow, ff, out Point2f[][] corners_markers, out int[] id_markers, detectorParameters, out Point2f[][] ref_markers);
-                    //CvAruco.DrawDetectedMarkers(out_flow, corners_markers, id_markers, Scalar.Crimson);
+                    CvAruco.DrawDetectedMarkers(out_flow, corners_markers, id_markers, Scalar.Crimson);
 
                     if (id_markers.Length > 0)
                     {
@@ -153,9 +153,9 @@ namespace Ing_progect_6_sem
                             Cv2.SolvePnP(objPoints, convert_array(corners_markers[i]), cam_matrix, dis_coef, rvec, tvec);
                             //Cv2.DrawFrameAxes(out_flow, cam_matrix, dis_coef, rvec, tvec, 0.3f);
                             debug_1.Text = "x: " + Math.Round(tvec.Get<double>(0), 3).ToString() + "; y: " + Math.Round(tvec.Get<double>(1), 3).ToString() + "; z: " + Math.Round(tvec.Get<double>(2), 3).ToString();
-                            //Point2f[] pp = corners_markers[i];
-                            //int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
-                            //int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
+                            Point2f[] pp = corners_markers[i];
+                            int x_center = (int)(pp[0].X + pp[1].X + pp[2].X + pp[3].X) / 4;
+                            int y_center = (int)(pp[0].Y + pp[1].Y + pp[2].Y + pp[3].Y) / 4;
                             //Cv2.PutText(out_flow, "*1", new OpenCvSharp.Point(pp[0].X, pp[0].Y), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
                             //Cv2.PutText(out_flow, "*2", new OpenCvSharp.Point(pp[1].X, pp[1].Y), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
                             //Cv2.PutText(out_flow, "*3", new OpenCvSharp.Point(pp[2].X, pp[2].Y), HersheyFonts.HersheySimplex, 0.5d, Scalar.Red);
