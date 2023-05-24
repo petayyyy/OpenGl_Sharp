@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\OpenGl_Sharp\\Lab_2\\test\\Lab_2.csproj": {}
+    "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\Lab_2\\test\\Lab_2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\OpenGl_Sharp\\Lab_2\\test\\Lab_2.csproj": {
+    "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\Lab_2\\test\\Lab_2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\OpenGl_Sharp\\Lab_2\\test\\Lab_2.csproj",
+        "projectUniqueName": "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\Lab_2\\test\\Lab_2.csproj",
         "projectName": "Lab_2",
-        "projectPath": "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\OpenGl_Sharp\\Lab_2\\test\\Lab_2.csproj",
+        "projectPath": "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\Lab_2\\test\\Lab_2.csproj",
         "packagesPath": "C:\\Users\\ilyah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\OpenGl_Sharp\\Lab_2\\test\\obj\\",
+        "outputPath": "C:\\Users\\ilyah\\Desktop\\Долги\\Технологии визуализации данных систем управления\\Lab_2\\test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ilyah\\AppData\\Roaming\\NuGet\\NuGet.Config",
