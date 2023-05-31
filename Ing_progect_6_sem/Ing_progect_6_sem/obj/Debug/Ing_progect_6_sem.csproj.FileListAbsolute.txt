@@ -36,10 +36,6 @@ A:\Git\OpenGl_Sharp\Ing_progect_6_sem\test_video\obj\Debug\Ing_progect_6_sem.csp
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\test_video\obj\Debug\Ing_progect_6_sem.csproj.CopyComplete
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\test_video\obj\Debug\test_video.exe
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\test_video\obj\Debug\test_video.pdb
-A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x86\OpenCvSharpExtern.dll
-A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x86\opencv_videoio_ffmpeg452.dll
-A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x64\OpenCvSharpExtern.dll
-A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x64\opencv_videoio_ffmpeg452_64.dll
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\OpenCvSharpExtern.dll
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\test_video.exe.config
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\test_video.exe
@@ -112,3 +108,7 @@ C:\Users\ilyah\Desktop\Долги\Технологии визуализации 
 C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Ing_progect_6_sem\Ing_progect_6_sem\obj\Debug\Ing_progect_6_sem.csproj.CopyComplete
 C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Ing_progect_6_sem\Ing_progect_6_sem\obj\Debug\test_video.exe
 C:\Users\ilyah\Desktop\Долги\Технологии визуализации данных систем управления\Ing_progect_6_sem\Ing_progect_6_sem\obj\Debug\test_video.pdb
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x86\OpenCvSharpExtern.dll
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x86\opencv_videoio_ffmpeg452.dll
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x64\OpenCvSharpExtern.dll
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x64\opencv_videoio_ffmpeg452_64.dll
