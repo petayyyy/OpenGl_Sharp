@@ -38,7 +38,9 @@
             this.Restart_but = new System.Windows.Forms.Button();
             this.debug_1 = new System.Windows.Forms.TextBox();
             this.debug_2 = new System.Windows.Forms.TextBox();
+            this.openGLControl1 = new SharpGL.OpenGLControl();
             ((System.ComponentModel.ISupportInitialize)(this.Main_picture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.openGLControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // Main_picture
@@ -55,9 +57,9 @@
             // Open_but
             // 
             this.Open_but.BackColor = System.Drawing.Color.White;
-            this.Open_but.Location = new System.Drawing.Point(1310, 63);
+            this.Open_but.Location = new System.Drawing.Point(1311, 170);
             this.Open_but.Name = "Open_but";
-            this.Open_but.Size = new System.Drawing.Size(114, 92);
+            this.Open_but.Size = new System.Drawing.Size(350, 92);
             this.Open_but.TabIndex = 1;
             this.Open_but.Text = "Open video";
             this.Open_but.UseVisualStyleBackColor = false;
@@ -74,9 +76,9 @@
             // Start_cam_but
             // 
             this.Start_cam_but.BackColor = System.Drawing.Color.White;
-            this.Start_cam_but.Location = new System.Drawing.Point(1310, 161);
+            this.Start_cam_but.Location = new System.Drawing.Point(1311, 268);
             this.Start_cam_but.Name = "Start_cam_but";
-            this.Start_cam_but.Size = new System.Drawing.Size(114, 92);
+            this.Start_cam_but.Size = new System.Drawing.Size(350, 92);
             this.Start_cam_but.TabIndex = 2;
             this.Start_cam_but.Text = "Start read camera";
             this.Start_cam_but.UseVisualStyleBackColor = false;
@@ -85,9 +87,9 @@
             // Restart_but
             // 
             this.Restart_but.BackColor = System.Drawing.Color.White;
-            this.Restart_but.Location = new System.Drawing.Point(1310, 259);
+            this.Restart_but.Location = new System.Drawing.Point(1311, 366);
             this.Restart_but.Name = "Restart_but";
-            this.Restart_but.Size = new System.Drawing.Size(114, 92);
+            this.Restart_but.Size = new System.Drawing.Size(350, 92);
             this.Restart_but.TabIndex = 3;
             this.Restart_but.Text = "Refresh";
             this.Restart_but.UseVisualStyleBackColor = false;
@@ -97,22 +99,36 @@
             // 
             this.debug_1.Location = new System.Drawing.Point(12, 7);
             this.debug_1.Name = "debug_1";
-            this.debug_1.Size = new System.Drawing.Size(1412, 22);
+            this.debug_1.Size = new System.Drawing.Size(1648, 22);
             this.debug_1.TabIndex = 4;
             // 
             // debug_2
             // 
             this.debug_2.Location = new System.Drawing.Point(12, 35);
             this.debug_2.Name = "debug_2";
-            this.debug_2.Size = new System.Drawing.Size(1412, 22);
+            this.debug_2.Size = new System.Drawing.Size(1648, 22);
             this.debug_2.TabIndex = 5;
+            // 
+            // openGLControl1
+            // 
+            this.openGLControl1.DrawFPS = false;
+            this.openGLControl1.Location = new System.Drawing.Point(1299, 481);
+            this.openGLControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openGLControl1.Name = "openGLControl1";
+            this.openGLControl1.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
+            this.openGLControl1.RenderContextType = SharpGL.RenderContextType.DIBSection;
+            this.openGLControl1.RenderTrigger = SharpGL.RenderTrigger.TimerBased;
+            this.openGLControl1.Size = new System.Drawing.Size(362, 290);
+            this.openGLControl1.TabIndex = 6;
+            this.openGLControl1.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl1_OpenGLDraw);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1436, 1046);
+            this.ClientSize = new System.Drawing.Size(1672, 1036);
+            this.Controls.Add(this.openGLControl1);
             this.Controls.Add(this.debug_2);
             this.Controls.Add(this.debug_1);
             this.Controls.Add(this.Restart_but);
@@ -122,6 +138,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.Main_picture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.openGLControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +154,7 @@
         private System.Windows.Forms.Button Restart_but;
         private System.Windows.Forms.TextBox debug_1;
         private System.Windows.Forms.TextBox debug_2;
+        private SharpGL.OpenGLControl openGLControl1;
     }
 }
 

@@ -112,3 +112,9 @@ A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x86\OpenCv
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x86\opencv_videoio_ffmpeg452.dll
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x64\OpenCvSharpExtern.dll
 A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\dll\x64\opencv_videoio_ffmpeg452_64.dll
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\SharpGL.dll
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\SharpGL.SceneGraph.dll
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\SharpGL.WinForms.dll
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\SharpGL.xml
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\SharpGL.SceneGraph.xml
+A:\Git\OpenGl_Sharp\Ing_progect_6_sem\Ing_progect_6_sem\bin\Debug\SharpGL.WinForms.xml
