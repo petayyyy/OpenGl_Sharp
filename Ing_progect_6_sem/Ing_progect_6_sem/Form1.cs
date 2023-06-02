@@ -256,14 +256,6 @@ namespace Ing_progect_6_sem
                             Rectangle rec = new Rectangle(0, 0, 480, 390);
                             openGLControl1.DrawToBitmap(bmcube, rec);
                             bmcube.MakeTransparent(Color.Black);
-                            pictureBox1.Image = bmcube;
-                            pictureBox1.Refresh();
-                            //Mat ffddddd = bmcube.ToMat();
-                            //ffddddd.Resize(new Size(640, 480));
-
-                            //Bitmap resized = new Bitmap(bmcube, new System.Drawing.Size(640, 480));
-                            //Main_picture.Image = BitmapConverter.ToBitmap(ffddddd);
-                            //Main_picture.Refresh();
                             var graphics = Graphics.FromImage(bmcam);
                             graphics.CompositingMode = CompositingMode.SourceOver;
                             if (bmcube != null)
@@ -271,10 +263,10 @@ namespace Ing_progect_6_sem
                                 bmcube.MakeTransparent(Color.Black);
                                 graphics.DrawImage(bmcube, 0, 0);
                             }
-                            pictureBox1.Image = bmcam;
-                            pictureBox1.Refresh();
-                            debug_2.Text = opengl1.RenderContextProvider.Width.ToString() + opengl1.RenderContextProvider.Height.ToString();
-                            //debug_2.Text = "Drone pose is x: " + Math.Round(x_c, 3).ToString() + "; y: " + Math.Round(y_c, 3).ToString() + "; z: " + Math.Round(z_c, 3).ToString() + "; yaw: " + Math.Round(tr_3D.add_yaw, 3).ToString();
+                            Main_picture.Image = bmcam;
+                            Main_picture.Refresh();
+                            //debug_2.Text = opengl1.RenderContextProvider.Width.ToString() + opengl1.RenderContextProvider.Height.ToString();
+                            debug_2.Text = "Drone pose is x: " + Math.Round(x_c, 3).ToString() + "; y: " + Math.Round(y_c, 3).ToString() + "; z: " + Math.Round(z_c, 3).ToString() + "; yaw: " + Math.Round(tr_3D.add_yaw, 3).ToString();
                         }
                     }
                 }
@@ -282,7 +274,8 @@ namespace Ing_progect_6_sem
                 if (!is_work)
                 {
                     //// Draw image on picturebox
-                    Main_picture.Image = BitmapConverter.ToBitmap(out_flow);
+                    Mat rre = out_flow.Resize(new Size(480, 390));
+                    Main_picture.Image = BitmapConverter.ToBitmap(rre);
                     Main_picture.Refresh();
                 }
             }
