@@ -295,6 +295,13 @@ namespace Ing_progect_6_sem
                 is_picture = false; 
                 Start_cam_but.Enabled = true;
                 Open_but.Enabled = true;
+                z_pose_drone = 0f;
+                x_pose_drone = 0f;
+                y_pose_drone = 0f;
+                distance_z = 0f;
+                distance_y = 0f;
+                distance_z = 0.5f;
+                takeoff.Text = "TakeOFF";
                 Graphics graphics = Graphics.FromImage(Main_picture.Image);
                 graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, Main_picture.Image.Width, Main_picture.Image.Height));
                 Main_picture.Refresh();
@@ -309,8 +316,10 @@ namespace Ing_progect_6_sem
         {
             is_cam = true;
             Open_but.Enabled = false;
-            _capture = new VideoCapture(0);
-            _capture.Open(0);
+            _capture = new VideoCapture(1);
+            _capture.Open(1);
+            //_capture = new VideoCapture(0);
+            //_capture.Open(0);
         }
         private void openGLControl1_OpenGLDraw(object sender, SharpGL.RenderEventArgs args)
         {
