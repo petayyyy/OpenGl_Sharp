@@ -308,7 +308,7 @@
             this.Controls.Add(this.Open_but);
             this.Controls.Add(this.Main_picture);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Ing_progect_Kholodilov";
             ((System.ComponentModel.ISupportInitialize)(this.Main_picture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.step_flight)).EndInit();
