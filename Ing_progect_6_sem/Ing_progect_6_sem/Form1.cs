@@ -53,7 +53,10 @@ namespace Ing_progect_6_sem
             Load += Form1_Load;
             Closed += Form1_Closed;
             opengl1 = openGLControl1.OpenGL;
-            objPoints = new Mat(4, 1, MatType.CV_32FC3, new float[,] { { -(float)lenght_marker / 2, -(float)lenght_marker / 2, 0 }, { (float)lenght_marker / 2, -(float)lenght_marker / 2, 0 }, { (float)lenght_marker / 2, (float)lenght_marker / 2, 0 }, { -(float)lenght_marker / 2, (float)lenght_marker / 2, 0 } });
+            objPoints = new Mat(4, 1, MatType.CV_32FC3, new float[,] { { -(float)lenght_marker / 2, -(float)lenght_marker / 2, 0 }, 
+                                                                        { (float)lenght_marker / 2, -(float)lenght_marker / 2, 0 }, 
+                                                                        { (float)lenght_marker / 2, (float)lenght_marker / 2, 0 }, 
+                                                                        { -(float)lenght_marker / 2, (float)lenght_marker / 2, 0 } });
         }
         private void Form1_Closed(object sender, EventArgs e)
         {
