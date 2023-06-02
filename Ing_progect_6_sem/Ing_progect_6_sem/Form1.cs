@@ -6,6 +6,7 @@ using OpenCvSharp.Extensions;
 using OpenCvSharp.Aruco;
 using Size = OpenCvSharp.Size;
 using SharpGL;
+using System.Drawing.Drawing2D;
 
 namespace Ing_progect_6_sem
 {
@@ -188,7 +189,8 @@ namespace Ing_progect_6_sem
                                 opengl1.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
                                 opengl1.MatrixMode(OpenGL.GL_PROJECTION);
                                 opengl1.LoadIdentity();
-                                opengl1.Perspective(60.0f, (double)bmcam.Width / (double)bmcam.Height, 0.01, 100.0);
+                                //opengl1.Perspective(60.0f, (double)bmcam.Width / (double)bmcam.Height, 0.01, 100.0);
+                                opengl1.Perspective(60.0f, (double)1280d / (double)960d, 0.01, 100.0);
                                 opengl1.Scale(1, 1, 1);
                                 opengl1.LookAt(0, 0, distance_z / 2d, 0, 0, 0, 0, 1, 0);
                                 opengl1.MatrixMode(OpenGL.GL_MODELVIEW);
@@ -249,12 +251,14 @@ namespace Ing_progect_6_sem
                                 draw_point_correct(-size, -size, -size_2, x_c, y_c, z_c);
 
                                 opengl1.End();
+                                opengl1.Flush();
 
                                 Rectangle rec = new Rectangle(0, 0, 640, 480);
                                 openGLControl1.DrawToBitmap(bmcube, rec);
                                 bmcube.MakeTransparent(Color.Black);
 
                                 var graphics = Graphics.FromImage(bmcam);
+                                graphics.CompositingMode = CompositingMode.SourceOver;
                                 if (bmcube != null)
                                 {
                                     bmcube.MakeTransparent(Color.Black);
